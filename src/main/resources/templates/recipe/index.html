@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="content">
+    <div class="header">
+        <h1 th:text="${title}">Default title</h1>
+    </div>
+
+
+    <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
+    <table class="table">
+        <tr th:each="recipe : ${recipes}">
+        <tr>
+            <td><a th:href="@{'/recipe/single/' + ${recipe.id}}"
+                   th:text="${recipe.recipeName}"
+                   th:id="${recipe.id}"></a></td>
+            <td><a th:href="@{'/recipe/edit/'+${recipe.id}}"></a></td>
+        </tr>
+        </tr>
+    </table>
+</div>
+<div class="sidenav">
+    <a href="/recipe/add">Add Recipe</a>
+    <!--<a href="/recipe/remove">Delete Recipe(s)</a>-->
+</div>
+</body>
+</html>

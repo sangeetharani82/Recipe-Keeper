@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+<div class="content">
+    <div class="header">
+        <h2 th:text="${title}">Default title</h2>
+    </div>
+
+    <div class="rows">
+        <div class="column side" style="background-color:#ccc;">
+            <form method="post" style="max-width:500px;" th:object="${category}">
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="categoryName">Title</label>
+                    </div>
+                    <div class="col-75">
+                        <input th:field="*{categoryName}" />
+                    </div>
+                    <span th:errors="*{categoryName}" class="error"></span>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Create"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="sidenav">
+    <a href="/recipe/add">Add Recipe</a>
+    <!--<a href="/recipe/remove">Delete Recipe(s)</a>-->
+</div>
+</body>
+</html>

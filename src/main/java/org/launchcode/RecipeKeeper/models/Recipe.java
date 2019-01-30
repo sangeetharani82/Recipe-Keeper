@@ -31,10 +31,11 @@ public class Recipe {
     private String cookTime;
 
     @NotNull
+    @Size(min=3, max = 300000)
     private String ingredient;
 
     @NotNull
-    @Size(min = 3, message = "Direction field should not be empty")
+    @Size(min=3, max = 3000000)
     private String direction;
 
     public Recipe(String recipeName, int servingSize, String prepTime, String cookTime,

@@ -94,4 +94,25 @@ public class RecipeController {
         model.addAttribute("title", cat.getCategoryName() + " Recipes");
         return "recipe/index";
     }
+
+    //delete a recipe
+    @RequestMapping(value="remove", method = RequestMethod.GET)
+    public String displayRemoveRecipeForm(Model model){
+        model.addAttribute("recipes", recipeDao.findAll());
+        model.addAttribute("title", "Delete recipe(s)");
+        return "recipe/remove";
+    }
+
+    @RequestMapping(value="remove", method = RequestMethod.POST)
+    public String processRemoveRecipeForm(@RequestParam(defaultValue = "-1") int[] recipeIds, Model model){
+        for (int recipeId : recipeIds){
+            if (recipeId != -1) {
+                recipeDao.delete(recipeId);
+                return "redirect:";
+            }
+        }
+        model.addAttribute("recipes", recipeDao.findAll());
+        model.addAttribute("title", "Delete recipe(s)");
+        return "recipe/remove";
+    }
 }

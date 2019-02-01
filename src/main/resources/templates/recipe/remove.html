@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="content">
+    <div class="header">
+        <h2 th:text="${title}">Default title</h2>
+    </div>
+    <form method="post">
+        <div class="row">
+            <div th:each="recipe : ${recipes}" class="checkbox">
+                <input type="checkbox" name="recipeIds" th:value="${recipe.id}" th:id="${recipe.id}"/>
+                <label th:for="${recipe.id}" th:text="${recipe.recipeName}"></label>
+                <br />
+            </div>
+            <div class="row">
+                <input type="submit" value="Delete recipe(s)" />
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

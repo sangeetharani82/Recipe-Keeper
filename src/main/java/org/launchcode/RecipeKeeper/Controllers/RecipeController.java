@@ -115,4 +115,40 @@ public class RecipeController {
         model.addAttribute("title", "Delete recipe(s)");
         return "recipe/remove";
     }
+
+    //Edit a recipe
+    @RequestMapping(value="edit/{recipeId}", method = RequestMethod.GET)
+    public String displayEditRecipeForm(Model model, @PathVariable int recipeId){
+        model.addAttribute(recipeDao.findOne(recipeId));
+        model.addAttribute("title", "Edit " + recipeDao.findOne(recipeId).getRecipeName());
+        model.addAttribute("courses", courseDao.findAll());
+        model.addAttribute("categories", categoryDao.findAll());
+        return "recipe/edit";
+    }
+
+    @RequestMapping(value = "edit/{recipeId}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable int recipeId, @RequestParam String recipeName,
+                                  @RequestParam int courseId, @RequestParam int categoryId,
+                                  @RequestParam int servingSize, @RequestParam String prepTime,
+                                  @RequestParam String cookTime,
+                                  @RequestParam String ingredient,
+                                  @RequestParam String direction){
+        Recipe edited = recipeDao.findOne(recipeId);
+        edited.setRecipeName(recipeName);
+        edited.setServingSize(servingSize);
+        edited.setPrepTime(prepTime);
+        edited.setCookTime(cookTime);
+        edited.setIngredient(ingredient);
+        edited.setDirection(direction);
+
+
+        Course cor = courseDao.findOne(courseId);
+        edited.setCourse(cor);
+
+        Category cat = categoryDao.findOne(categoryId);
+        edited.setCategory(cat);
+
+        recipeDao.save(edited);
+        return "redirect:/recipe";
+    }
 }

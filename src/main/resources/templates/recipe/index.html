@@ -17,7 +17,9 @@
                    th:text="${recipe.recipeName}"
                    th:id="${recipe.id}"></a></td>
             <td><a th:href="@{'/recipe/edit/'+${recipe.id}}">Edit</a></td>
-        </tr>
+            <td><a th:href="@{'/recipe/delete/'+${recipe.id}}">Delete</a></td>
+
+    </tr>
         </tr>
     </table>
 </div>

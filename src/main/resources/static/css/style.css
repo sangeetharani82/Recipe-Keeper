@@ -95,8 +95,8 @@ body {
 }
 
 .sidenav {
-  height: 92%;
-  width: 150px;
+  height: 95%;
+  width: 120px;
   position: fixed;
   z-index: 1;
   bottom: 0;
@@ -109,9 +109,9 @@ body {
 /* Side navigation links */
 .sidenav a {
   color: white;
-  padding: 16px;
+  padding: 26px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 13px;
   display: block;
 }
 
@@ -123,7 +123,7 @@ body {
 
 /* Style the content */
 .content {
-  margin-right: 150px;
+  margin-right: 120px;
   padding-right: 20px;
 }
 
@@ -230,6 +230,29 @@ th, td {
 .topnav .search-container {
   float: right;
 }
+
+#share-buttons img {
+width: 5px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+ .search-container button:hover {
+  background: #ccc;
+}
+
 
 </style>
 </head>

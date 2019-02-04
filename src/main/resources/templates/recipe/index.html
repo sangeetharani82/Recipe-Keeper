@@ -13,10 +13,10 @@
     <table class="table">
         <tr th:each="recipe : ${recipes}">
         <tr>
-            <td><a th:href="@{'/recipe/single/' + ${recipe.id}}"
-                   th:text="${recipe.recipeName}"
-                   th:id="${recipe.id}"></a></td>
+            <td th:text="${recipe.recipeName}"
+                th:id="${recipe.id}"></td>
             <td><a th:href="@{'/recipe/edit/'+${recipe.id}}">Edit</a></td>
+            <td><a th:href="@{'/recipe/single/' + ${recipe.id}}">View</a></td>
             <td><a th:href="@{'/recipe/delete/'+${recipe.id}}">Delete</a></td>
 
     </tr>

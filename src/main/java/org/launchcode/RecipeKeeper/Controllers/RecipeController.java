@@ -33,7 +33,7 @@ public class RecipeController {
     public String index(Model model) {
 
         model.addAttribute("recipes", recipeDao.findAll());
-        model.addAttribute("title", "All recipes");
+        model.addAttribute("title", "List of Recipes");
         return "recipe/index";
     }
 

@@ -17,7 +17,12 @@
                 th:id="${recipe.id}"></td>
             <td><a th:href="@{'/recipe/edit/'+${recipe.id}}">Edit</a></td>
             <td><a th:href="@{'/recipe/single/' + ${recipe.id}}">View</a></td>
-            <td><a th:href="@{'/recipe/delete/'+${recipe.id}}">Delete</a></td>
+            <!--<td><a th:href="@{'/recipe/delete/'+${recipe.id}}">Delete</a></td>-->
+        <td>
+            <form th:action="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+                <button type="submit" onClick="return confirm('sure?')">Delete it</button>
+            </form>
+        </td>
 
     </tr>
         </tr>

@@ -15,17 +15,28 @@
         <tr>
             <td th:text="${recipe.recipeName}"
                 th:id="${recipe.id}"></td>
-            <td><a th:href="@{'/recipe/edit/'+${recipe.id}}">Edit</a></td>
-            <td><a th:href="@{'/recipe/single/' + ${recipe.id}}">View</a></td>
-            <!--<td><a th:href="@{'/recipe/delete/'+${recipe.id}}">Delete</a></td>-->
         <td>
-            <form th:action="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-                <button type="submit" onClick="return confirm('sure?')">Delete it</button>
+            <form th:action="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
+                <button>Edit</button>
             </form>
         </td>
-
+        <td>
+            <form th:action="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                <button>View</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+                <button type="submit" onClick="return confirm('sure?')">Delete</button>
+            </form>
+        </td>
     </tr>
         </tr>
+        <td>
+            <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
+                <button>Comment here</button>
+            </form>
+        </td>
     </table>
 </div>
 

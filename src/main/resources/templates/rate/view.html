@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="content">
+    <div class="header">
+        <h1 th:text="${title}">Default title</h1>
+    </div>
+
+    <p th:unless="${ratings} and ${ratings.size()}">Rate/Comment</p>
+    <table class="table">
+        <tr th:each="rating : ${ratings}">
+        <tr>
+            <th>Rating</th>
+            <td th:text="${rating.rating}"
+                th:id="${rating.id}">
+            </td>
+        </tr>
+        <tr>
+            <th>Comment</th>
+            <td th:text="${rating.comment}">
+            </td>
+        </tr>
+        </tr>
+
+    </table>
+    <h1></h1>
+    <td>
+        <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
+            <button>Comment here</button>
+        </form>
+    </td>
+
+</div>
+
+</body>
+</html>

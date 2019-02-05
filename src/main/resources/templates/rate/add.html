@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+<div class="content">
+    <div class="header">
+        <h2 th:text="${title}">Default title</h2>
+    </div>
+    <div class="rows">
+        <div class="column side" style="background-color:#ccc;">
+            <form method="post" style="max-width:500px;" th:object="${rate}">
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="recipeName">Recipe</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="recipeId" required="required">
+                            <option value="">--Please choose a Recipe--</option>
+                            <option th:each="recipe : ${recipes}"
+                                    th:text="${recipe.recipeName}"
+                                    th:value="${recipe.id}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="rating">Rating</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="rating" id="rating">
+                            <option value="0" selected="selected">---Select---</option>
+                            <option value="1">Poor</option>
+                            <option value="2">Below Average</option>
+                            <option value="3">Average</option>
+                            <option value="4">Good</option>
+                            <option value="5">Excellent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="comment">Comment</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea th:field="*{comment}" placeholder="Comment" style="height:200px"></textarea>
+                    </div>
+                    <span th:errors="*{comment}" class="error"></span>
+
+                </div>
+                <div class="row">
+                    <input type="submit" value="Create"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

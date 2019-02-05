@@ -1,11 +1,10 @@
 package org.launchcode.RecipeKeeper.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -37,6 +36,10 @@ public class Recipe {
     @NotNull
     @Size(min=3, max = 3000000)
     private String direction;
+
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    private List<RateComment> rateCommentList = new ArrayList<>();
 
     public Recipe(String recipeName, int servingSize, String prepTime, String cookTime,
                   String ingredient, String direction) {
@@ -118,5 +121,9 @@ public class Recipe {
 
     public void setIngredient(String ingredient) {
         this.ingredient = ingredient;
+    }
+
+    public List<RateComment> getRateCommentList() {
+        return rateCommentList;
     }
 }

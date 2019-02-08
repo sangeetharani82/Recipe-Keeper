@@ -253,6 +253,11 @@ display: inline;
   background: #ccc;
 }
 
+a, a:active, a:hover, a:focus{
+text-decoration: none;
+color: #000;
+}
+
 
 </style>
 </head>

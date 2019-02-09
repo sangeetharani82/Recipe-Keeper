@@ -62,7 +62,10 @@ public class RecipeController {
         newRecipe.setCourse(cor);
         newRecipe.setCategory(cat);
         recipeDao.save(newRecipe);
-        return "redirect:single/"+newRecipe.getId();
+
+        model.addAttribute("message", "Recipe added successfully!");
+        return "message";
+        // return "redirect:single/"+newRecipe.getId();
     }
 
     //view single recipe
@@ -99,8 +102,9 @@ public class RecipeController {
     @RequestMapping(value = "delete/{recipeId}")
     public String delete(@PathVariable int recipeId, Model model){
         recipeDao.delete(recipeId);
-        model.addAttribute("message", "Recipe was deleted");
-        return "redirect:/recipe";
+        model.addAttribute("message", "Recipe deleted successfully!");
+        return "message";
+        //return "redirect:/recipe";
     }
 //    //delete a recipe
 //    @RequestMapping(value="remove", method = RequestMethod.GET)
@@ -137,7 +141,7 @@ public class RecipeController {
     public String processEditForm(@PathVariable int recipeId, @RequestParam String recipeName,
                                   @RequestParam int courseId, @RequestParam int categoryId,
                                   @RequestParam int servingSize, @RequestParam String prepTime,
-                                  @RequestParam String cookTime,
+                                  @RequestParam String cookTime, Model model,
                                   @RequestParam String ingredient,
                                   @RequestParam String direction){
         Recipe edited = recipeDao.findOne(recipeId);
@@ -156,6 +160,9 @@ public class RecipeController {
         edited.setCategory(cat);
 
         recipeDao.save(edited);
-        return "redirect:/recipe";
+
+        model.addAttribute("message", "Recipe edited and saved successfully!");
+        return "message";
+        //return "redirect:/recipe";
     }
 }

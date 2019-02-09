@@ -54,7 +54,10 @@ public class RateCommentController {
         Recipe recipe = recipeDao.findOne(recipeId);
         newRate.setRecipe(recipe);
         rateCommentDao.save(newRate);
-        return "redirect:";
+
+        model.addAttribute("message", "Successfully added!");
+        return "message";
+        //return "redirect:";
     }
 
     @RequestMapping(value = "recipe", method = RequestMethod.GET)

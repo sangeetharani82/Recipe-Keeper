@@ -8,24 +8,21 @@
         <h1 th:text="${title}">Default title</h1>
     </div>
 
-    <p th:unless="${ratings} and ${ratings.size()}">Rate/Comment</p>
+    <p th:unless="${ratings} and ${ratings.size()}">Rate/comment the recipe</p>
     <table class="table">
-        <tr th:each="rating : ${ratings}">
+
         <tr>
             <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+        <tr th:each="rating : ${ratings}">
             <td th:text="${rating.rating}"
                 th:id="${rating.id}">
             </td>
-        </tr>
-        <tr>
-            <th>Comment</th>
-            <td th:text="${rating.comment}">
-            </td>
-        </tr>
+            <td th:text="${rating.comment}"></td>
         </tr>
 
     </table>
-    <h1></h1>
     <td>
         <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
             <button>Comment here</button>

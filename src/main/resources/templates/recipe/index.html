@@ -12,25 +12,27 @@
     <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
     <table class="table">
         <tr th:each="recipe : ${recipes}">
-        <tr>
-            <td th:text="${recipe.recipeName}"
-                th:id="${recipe.id}"></td>
-        <td>
-            <form th:action="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
-                <button>Edit</button>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                <button>View</button>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-                <button type="submit" onClick="return confirm('sure?')">Delete</button>
-            </form>
-        </td>
-    </tr>
+            <tr>
+                <td th:text="${recipe.recipeName}"
+                    th:id="${recipe.id}"></td>
+                <td>
+                    <form th:action="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
+                        <button>Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                        <button>View</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+                        <button type="submit" onClick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+                <td  th:id="${recipe.id}"><a th:href="@{'/rate/recipe?id=' + ${recipe.id}}">
+                    <button>View Ratings</button></a></td>
+            </tr>
         </tr>
         <td>
             <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">

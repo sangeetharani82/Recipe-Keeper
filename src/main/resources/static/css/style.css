@@ -16,7 +16,7 @@ body {
 }
 .header{
     text-align: center;
-    color: hsl(290,100%,50%);
+    color: #333;
 }
 .title{
     text-align: left;
@@ -27,6 +27,9 @@ body {
 .topnav {
   overflow: hidden;
   background-color: #333;
+  position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 /* Style the topnav links */
@@ -64,8 +67,8 @@ body {
 /* Style the content */
 .content {
   background-color: #ddd;
-  padding: 10px;
-  height: 100%; /* Should be removed. Only for demonstration */
+  padding: 50px;
+  height: 1500px;
 }
 
 /* Style the footer */
@@ -95,7 +98,7 @@ body {
 }
 
 .sidenav {
-  height: 95%;
+  height: 93%;
   width: 120px;
   position: fixed;
   z-index: 1;
@@ -149,7 +152,7 @@ label {
 }
 
 input[type=submit] {
-  background-color: #4CAF50;
+  background-color: #333;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -196,11 +199,13 @@ th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  font-size: 15px;
 
 }
 
+
 .tableheading {
-    font-size: 200%;
+    font-size: 100%;
     text-align: center;
 
 }
@@ -209,6 +214,7 @@ th, td {
   .col-25, .col-75, input[type=submit], input[type=email], input[type=password] {
     width: 100%;
     margin-top: 0;
+
   }
 .column {
   float: left;
@@ -245,19 +251,21 @@ display: inline;
   margin-top: 8px;
   margin-right: 16px;
   background: #ddd;
-  font-size: 17px;
+  font-size: 10px;
   border: none;
   cursor: pointer;
 }
  .search-container button:hover {
   background: #ccc;
 }
-
-a, a:active, a:hover, a:focus{
-text-decoration: none;
-color: #000;
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
 }
-
-
+}
 </style>
 </head>

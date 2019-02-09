@@ -14,7 +14,13 @@
     <table class="table">
         <tr th:each="category : ${categories}">
         <tr>
-            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}" th:text="${category.categoryName}"></a></td>
+            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}"
+                                             th:text="${category.categoryName}"></a></td>
+        <td>
+            <form th:action="@{'/category/delete/'+${category.id}}" th:object="${category}" method="post">
+                <button type="submit" onClick="return confirm('sure?')">Delete</button>
+            </form>
+        </td>
         </tr>
         </tr>
     </table>

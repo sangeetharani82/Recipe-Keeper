@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,6 +46,18 @@ public class CategoryController {
             return "category/add";
         }
         categoryDao.save(category);
-        return "redirect:";
+
+        model.addAttribute("message", "Successfully added!");
+        return "message";
+        //return "redirect:";
+    }
+
+    // delete each Category
+    @RequestMapping(value = "delete/{categoryId}")
+    public String delete(@PathVariable int categoryId, Model model){
+        categoryDao.delete(categoryId);
+        model.addAttribute("message", "Successfully deleted!");
+        return "message";
+        //return "redirect:/category";
     }
 }

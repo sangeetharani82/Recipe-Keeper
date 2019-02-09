@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+
+    <div class="alert success">
+        <strong th:text="${message}">Success!</strong>
+        <h1></h1>
+        <td>
+            <form th:action="@{'/recipe'}" method="get">
+                <button>Home</button>
+            </form>
+        </td>
+    </div>
+
+
+</div>
+
+
+
+</body>
+</html>

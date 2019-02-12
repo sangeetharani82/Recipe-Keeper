@@ -48,7 +48,7 @@ public class CategoryController {
         categoryDao.save(category);
 
         model.addAttribute("message", "Successfully added!");
-        return "message";
+        return "category/message";
         //return "redirect:";
     }
 
@@ -57,7 +57,7 @@ public class CategoryController {
     public String delete(@PathVariable int categoryId, Model model){
         categoryDao.delete(categoryId);
         model.addAttribute("message", "Successfully deleted!");
-        return "message";
+        return "category/message";
         //return "redirect:/category";
     }
 }

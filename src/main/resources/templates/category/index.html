@@ -8,28 +8,34 @@
         <h1 th:text="${title}">Default title</h1>
     </div>
 
-    <h4><a th:href="@{'/category/add'}">Add a Category</a></h4>
+    <form th:action="@{'/category/add'}" th:object="${category}" method="get">
+        <button>Add a Category</button>
+    </form>
+    <hr />
     <p th:unless="${categories} and ${categories.size()}">no categories :-(</p>
 
     <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
         <tr th:each="category : ${categories}">
         <tr>
-            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}"
-                                             th:text="${category.categoryName}"></a></td>
-        <td>
-            <form th:action="@{'/category/delete/'+${category.id}}" th:object="${category}" method="post">
-                <button type="submit" onClick="return confirm('sure?')">Delete</button>
-            </form>
-        </td>
+            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}" th:text="${category.categoryName}"></a></td>
+            <td>
+                <form th:action="@{'/category/delete/'+${category.id}}" th:object="${category}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                </form>
+            </td>
         </tr>
         </tr>
     </table>
+    <hr />
 
 </div>
 
-<div class="sidenav">
-    <a href="/recipe/add">Add Recipe</a>
-    <!--<a href="/recipe/remove">Delete Recipe(s)</a>-->
-</div>
+
 </body>
 </html>

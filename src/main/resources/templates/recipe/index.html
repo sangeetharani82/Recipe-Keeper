@@ -11,6 +11,16 @@
 
     <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
     <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Modify</th>
+            <th>Detail</th>
+            <th>Remove</th>
+            <th>View Ratings/comments</th>
+        </tr>
+
+        </thead>
         <tr th:each="recipe : ${recipes}">
             <tr>
                 <td th:text="${recipe.recipeName}"
@@ -34,12 +44,20 @@
                     <button>View Ratings</button></a></td>
             </tr>
         </tr>
+
+    </table>
+    <tr>
+        <hr />
         <td>
+            <form th:action="@{'/addIngredients/add/'}" th:object="${recipe}" method="get">
+                <button>Add Ingredients to Recipe</button>
+            </form>
+            <h3></h3>
             <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
                 <button>Comment here</button>
             </form>
         </td>
-    </table>
+    </tr>
 </div>
 
 </body>

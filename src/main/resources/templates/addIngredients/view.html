@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="content">
+    <div class="header">
+        <h1 th:text="${title}">Default title</h1>
+    </div>
+
+    <p th:unless="${ingredientLists} and ${ingredientLists.size()}">No Ingredients added yet</p>
+    <table class="table">
+        <tr>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+
+        </tr>
+        <tr th:each = "list : ${ingredientLists}">
+
+        <tr>
+            <td th:text="${list.ingredient.ingredientName}"></td>
+            <td th:id="${list.id}"
+                th:text="${list.quantity}"></td>
+            <td>
+                <form th:action="@{'/addIngredients/delete/'+${list.id}}" th:object="${addIngredients}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tr>
+    </table>
+    <hr/>
+    <td>
+        <form th:action="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
+            <button>Add Ingredients To Recipe</button>
+        </form>
+    </td>
+
+</div>
+
+</body>
+</html>

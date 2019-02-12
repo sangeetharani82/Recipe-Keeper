@@ -30,10 +30,6 @@ public class Recipe {
     private String cookTime;
 
     @NotNull
-    @Size(min=3, max = 300000)
-    private String ingredient;
-
-    @NotNull
     @Size(min=3, max = 3000000)
     private String direction;
 
@@ -41,14 +37,17 @@ public class Recipe {
     @JoinColumn(name = "recipe_id")
     private List<RateComment> rateCommentList = new ArrayList<>();
 
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    private List<AddIngredientsToRecipe> addIngredientsToRecipes = new ArrayList<>();
+
     public Recipe(String recipeName, int servingSize, String prepTime, String cookTime,
-                  String ingredient, String direction) {
+                  String direction) {
         this();
         this.recipeName = recipeName;
         this.servingSize = servingSize;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
-        this.ingredient = ingredient;
         this.direction = direction;
     }
 
@@ -115,15 +114,11 @@ public class Recipe {
         this.category = category;
     }
 
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
     public List<RateComment> getRateCommentList() {
         return rateCommentList;
+    }
+
+    public List<AddIngredientsToRecipe> getAddIngredientsToRecipes() {
+        return addIngredientsToRecipes;
     }
 }

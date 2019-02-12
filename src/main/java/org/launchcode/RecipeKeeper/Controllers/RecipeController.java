@@ -64,7 +64,7 @@ public class RecipeController {
         recipeDao.save(newRecipe);
 
         model.addAttribute("message", "Recipe added successfully!");
-        return "message";
+        return "recipe/message";
         // return "redirect:single/"+newRecipe.getId();
     }
 
@@ -103,7 +103,7 @@ public class RecipeController {
     public String delete(@PathVariable int recipeId, Model model){
         recipeDao.delete(recipeId);
         model.addAttribute("message", "Recipe deleted successfully!");
-        return "message";
+        return "recipe/message";
         //return "redirect:/recipe";
     }
 //    //delete a recipe
@@ -142,14 +142,12 @@ public class RecipeController {
                                   @RequestParam int courseId, @RequestParam int categoryId,
                                   @RequestParam int servingSize, @RequestParam String prepTime,
                                   @RequestParam String cookTime, Model model,
-                                  @RequestParam String ingredient,
                                   @RequestParam String direction){
         Recipe edited = recipeDao.findOne(recipeId);
         edited.setRecipeName(recipeName);
         edited.setServingSize(servingSize);
         edited.setPrepTime(prepTime);
         edited.setCookTime(cookTime);
-        edited.setIngredient(ingredient);
         edited.setDirection(direction);
 
 
@@ -162,7 +160,7 @@ public class RecipeController {
         recipeDao.save(edited);
 
         model.addAttribute("message", "Recipe edited and saved successfully!");
-        return "message";
+        return "recipe/message";
         //return "redirect:/recipe";
     }
 }

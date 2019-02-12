@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+<div class="content">
+    <div class="header">
+        <h2 th:text="${title}">Default title</h2>
+    </div>
+    <div class="rows">
+        <div class="column side" style="background-color:#ccc;">
+            <form method="post" style="max-width:500px;" th:object="${add}">
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="recipeName">Recipe</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="recipeId" required="required">
+                            <option value="">--Please choose a Recipe--</option>
+                            <option th:each="recipe : ${recipes}"
+                                    th:text="${recipe.recipeName}"
+                                    th:value="${recipe.id}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="ingredientName">Ingredient</label>
+                    </div>
+                    <div class="col-75">
+                        <select name="ingredientId" required="required">
+                            <option value="">--Please choose an Ingredient--</option>
+                            <option th:each="ingredient : ${ingredients}"
+                                    th:text="${ingredient.ingredientName}"
+                                    th:value="${ingredient.id}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label th:for="quantity">Quantity</label>
+                    </div>
+                    <div class="col-75">
+                        <input th:field="*{quantity}" placeholder="Quantity" />
+                    </div>
+                    <span th:errors="*{quantity}" class="error"></span>
+
+                </div>
+
+
+                <!--<h1></h1>
+
+                <table>
+                    <tr>
+                    <th>Ingredients</th>
+                    <th>Quantity</th></tr>
+                <div th:each="ingredient : ${ingredients}" class="checkbox">
+
+                        <tr>
+                            <td><input type="checkbox" name="ingredientIds" th:value="${ingredient.id}"
+                                   th:id="${ingredient.id}"/>
+                            <label th:for="${ingredient.id}" th:text="${ingredient.ingredientName}"></label></td>
+
+                            <td><label th:for="quantity"></label>
+                            <input type="text" th:field="*{quantity}"
+                                   name="quantityIds"/></td>
+                        </tr>
+                </div>
+                    </table>-->
+
+                <div class="row">
+                    <input type="submit" value="Add"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

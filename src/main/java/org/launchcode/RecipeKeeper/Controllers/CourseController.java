@@ -49,7 +49,7 @@ public class CourseController {
         courseDao.save(course);
 
         model.addAttribute("message", "Successfully added!");
-        return "message";
+        return "course/message";
         //return "redirect:";
     }
 
@@ -58,7 +58,7 @@ public class CourseController {
     public String delete(@PathVariable int courseId, Model model){
         courseDao.delete(courseId);
         model.addAttribute("message", "Successfully deleted!");
-        return "message";
+        return "course/message";
         //return "redirect:/course";
     }
 

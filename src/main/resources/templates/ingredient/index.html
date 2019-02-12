@@ -7,11 +7,11 @@
     <div class="header">
         <h1 th:text="${title}">Default title</h1>
     </div>
-    <form th:action="@{'/course/add'}" th:object="${course}" method="get">
-        <button>Add a Course</button>
+    <form th:action="@{'/ingredient/add'}" th:object="${ingredient}" method="get">
+        <button>Add an Ingredient</button>
     </form>
     <hr />
-    <p th:unless="${courses} and ${courses.size()}">no courses :-(</p>
+    <p th:unless="${ingredients} and ${ingredients.size()}">no ingredients :-(</p>
 
     <table class="table">
         <thead>
@@ -20,19 +20,18 @@
             <th>Remove</th>
         </tr>
         </thead>
-        <tr th:each="course : ${courses}">
+        <tr th:each="ingredient : ${ingredients}">
         <tr>
-            <td th:id = "${course.id}" ><a th:href="@{'/recipe/course?id=' + ${course.id}}"
-                                           th:text="${course.courseName}"></a></td>
+            <td th:id = "${ingredient.id}" ><a th:href="@{'/ingredient/edit/' + ${ingredient.id}}"
+                                               th:text="${ingredient.ingredientName}"></a></td>
             <td>
-                <form th:action="@{'/course/delete/'+${course.id}}" th:object="${course}" method="post">
+                <form th:action="@{'/ingredient/delete/'+${ingredient.id}}" th:object="${ingredient}" method="post">
                     <button type="submit" onClick="return confirm('sure?')">Delete</button>
                 </form>
             </td>
         </tr>
         </tr>
     </table>
-
     <hr />
 </div>
 

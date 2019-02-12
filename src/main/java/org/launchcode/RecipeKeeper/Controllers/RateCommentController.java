@@ -56,7 +56,7 @@ public class RateCommentController {
         rateCommentDao.save(newRate);
 
         model.addAttribute("message", "Successfully added!");
-        return "message";
+        return "rate/message";
         //return "redirect:";
     }
 

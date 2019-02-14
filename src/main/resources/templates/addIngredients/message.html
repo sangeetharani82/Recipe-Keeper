@@ -11,6 +11,10 @@
             <form th:action="@{'/addIngredients'}" method="get">
                 <button>Home</button>
             </form>
+            <h3></h3>
+            <form th:action="@{'/addIngredients/add/'}" th:object="${recipe}" method="get">
+                <button>Add Ingredients to Recipe</button>
+            </form>
         </td>
     </div>
 

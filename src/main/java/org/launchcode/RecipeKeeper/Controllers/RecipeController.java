@@ -64,7 +64,7 @@ public class RecipeController {
         recipeDao.save(newRecipe);
 
         model.addAttribute("message", "Recipe added successfully!");
-        return "recipe/message";
+        return "recipe/recipeMsg";
         // return "redirect:single/"+newRecipe.getId();
     }
 
@@ -160,7 +160,7 @@ public class RecipeController {
         recipeDao.save(edited);
 
         model.addAttribute("message", "Recipe edited and saved successfully!");
-        return "recipe/message";
+        return "recipe/recipeMsg";
         //return "redirect:/recipe";
     }
 }

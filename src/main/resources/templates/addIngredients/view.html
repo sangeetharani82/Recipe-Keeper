@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<nav th:replace="fragments :: navigation"></nav>
+<!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="content">
     <div class="header">
         <h1 th:text="${title}">Default title</h1>
     </div>
-
+    <td>
+        <form th:action="@{'/recipe'}" method="get">
+            <button>Home</button>
+        </form>
+    </td>
+    <hr/>
     <p th:unless="${ingredientLists} and ${ingredientLists.size()}">No Ingredients added yet</p>
     <table class="table">
         <tr>

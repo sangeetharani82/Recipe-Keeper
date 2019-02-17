@@ -8,6 +8,12 @@
     <div class="header">
         <h2 th:text="${title}">Default title</h2>
     </div>
+    <td>
+        <form th:action="@{'/course'}" method="get">
+            <button>Home</button>
+        </form>
+    </td>
+    <hr/>
     <div class="rows">
         <div class="column side" style="background-color:#ccc;">
             <form method="post" style="max-width:500px;" th:object="${course}">

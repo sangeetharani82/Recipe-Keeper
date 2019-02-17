@@ -164,6 +164,7 @@ public class RecipeController {
         recipeDao.save(edited);
 
         model.addAttribute("message", "Recipe edited and saved successfully!");
+
         List<AddIngredientsToRecipe> lists = edited.getAddIngredientsToRecipes();
         model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
         model.addAttribute("ingredientLists", lists);

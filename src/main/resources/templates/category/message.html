@@ -11,6 +11,9 @@
             <form th:action="@{'/category'}" method="get">
                 <button>Home</button>
             </form>
+            <form th:action="@{'/category/add'}" th:object="${category}" method="get">
+                <button>Add a Category</button>
+            </form>
         </td>
     </div>
 

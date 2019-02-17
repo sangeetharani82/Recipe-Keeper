@@ -8,12 +8,8 @@
         <strong th:text="${message}">Success!</strong>
         <h1></h1>
         <td>
-            <form th:action="@{'/addIngredients'}" method="get">
+            <form th:action="@{'/recipe'}" method="get">
                 <button>Home</button>
-            </form>
-            <h3></h3>
-            <form th:action="@{'/addIngredients/add/'}" th:object="${recipe}" method="get">
-                <button>Add Ingredients to Recipe</button>
             </form>
         </td>
     </div>

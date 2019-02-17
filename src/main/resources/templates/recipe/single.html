@@ -48,16 +48,32 @@
                 <td th:text="${i.direction}"></td>
             </tr>
         </table>
-            <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
-                <button>View Recipe Ingredients</button></a>
-            </td>
+        <table class="table">
+            <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+            </tr>
+            <tr th:each = "list : ${ingredientLists}">
+
+            <tr>
+                <td th:text="${list.ingredient.ingredientName}"></td>
+                <td th:id="${list.id}"
+                    th:text="${list.quantity}"></td>
+            </tr>
+            </tr>
+        </table>
         <h5></h5>
+        <hr />
+        <tr>
+            <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
+                <button>Edit ingredients</button></a>
+            </td>
             <td>
-                <form th:action="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
-                    <button>Add Ingredients To Recipe</button>
+                <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
+                    <button>Comment here</button>
                 </form>
             </td>
-        <hr />
+        </tr>
     </div>
 
 </div>

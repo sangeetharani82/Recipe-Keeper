@@ -2,11 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<nav th:replace="fragments :: navigation"></nav>
+<!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="content">
     <div class="header">
         <h1 th:text="${title}">Default title</h1>
     </div>
+
+    <td>
+        <form th:action="@{'/recipe'}" method="get">
+            <button>Home</button>
+        </form>
+    </td>
+    <hr/>
 
     <p th:unless="${ratings} and ${ratings.size()}">Rate/comment the recipe</p>
     <table class="table">
@@ -23,6 +30,7 @@
         </tr>
 
     </table>
+    <hr/>
     <td>
         <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
             <button>Comment here</button>

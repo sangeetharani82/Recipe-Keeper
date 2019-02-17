@@ -62,8 +62,10 @@ public class AddIngredientsController {
 
         addIngredientsDao.save(newSet);
         model.addAttribute("message", "Successfully added!");
-        return "addIngredients/message";
-        //return "redirect:";
+        List<AddIngredientsToRecipe> lists = recipe.getAddIngredientsToRecipes();
+        model.addAttribute("title", "Ingredients needed for " + recipe.getRecipeName());
+        model.addAttribute("ingredientLists", lists);
+        return "addIngredients/view";
     }
 
     // delete each Category
@@ -72,7 +74,6 @@ public class AddIngredientsController {
         addIngredientsDao.delete(id);
         model.addAttribute("message", "Successfully deleted!");
         return "addIngredients/message";
-        //return "redirect:/addIngredients";
     }
 
     @RequestMapping(value = "recipe", method = RequestMethod.GET)

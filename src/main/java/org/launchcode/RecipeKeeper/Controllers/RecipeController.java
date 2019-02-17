@@ -1,5 +1,6 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
+import org.launchcode.RecipeKeeper.models.AddIngredientsToRecipe;
 import org.launchcode.RecipeKeeper.models.Category;
 import org.launchcode.RecipeKeeper.models.Course;
 import org.launchcode.RecipeKeeper.models.Recipe;
@@ -33,14 +34,14 @@ public class RecipeController {
     public String index(Model model) {
 
         model.addAttribute("recipes", recipeDao.findAll());
-        model.addAttribute("title", "List of Recipes");
+        model.addAttribute("title", "Recipes");
         return "recipe/index";
     }
 
     // add/create a recipe
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddRecipeForm(Model model) {
-        model.addAttribute("title", "Add recipes");
+        model.addAttribute("title", "Add a recipe");
         model.addAttribute(new Recipe());
         model.addAttribute("courses", courseDao.findAll());
         model.addAttribute("categories", categoryDao.findAll());
@@ -64,7 +65,7 @@ public class RecipeController {
         recipeDao.save(newRecipe);
 
         model.addAttribute("message", "Recipe added successfully!");
-        return "recipe/recipeMsg";
+        return "addIngredients/view";
         // return "redirect:single/"+newRecipe.getId();
     }
 
@@ -76,6 +77,9 @@ public class RecipeController {
         model.addAttribute("course", recipe.getCourse());
         model.addAttribute("category", recipe.getCategory());
         model.addAttribute("recipe", recipe);
+        List<AddIngredientsToRecipe> lists = recipe.getAddIngredientsToRecipes();
+        model.addAttribute("title", "Ingredients needed for " + recipe.getRecipeName());
+        model.addAttribute("ingredientLists", lists);
         return "recipe/single";
     }
 
@@ -160,7 +164,11 @@ public class RecipeController {
         recipeDao.save(edited);
 
         model.addAttribute("message", "Recipe edited and saved successfully!");
-        return "recipe/recipeMsg";
+        List<AddIngredientsToRecipe> lists = edited.getAddIngredientsToRecipes();
+        model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
+        model.addAttribute("ingredientLists", lists);
+
+        return "addIngredients/view";
         //return "redirect:/recipe";
     }
 }

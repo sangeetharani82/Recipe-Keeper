@@ -3,11 +3,15 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-<nav th:replace="fragments :: navigation"></nav>
+<!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="content">
     <div class="header">
         <h2 th:text="${title}">Default title</h2>
     </div>
+    <form th:action="@{'/recipe'}" method="get">
+        <button>Home</button>
+    </form>
+    <hr/>
     <div class="rows">
         <div class="column side" style="background-color:#ccc;">
             <form method="post" style="max-width:500px;" th:object="${recipe}">
@@ -95,10 +99,8 @@
                 </div>
             </form>
         </div>
-
-
-
     </div>
+    <hr/>
 </div>
 </body>
 </html>

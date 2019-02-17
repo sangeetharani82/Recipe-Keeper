@@ -56,6 +56,9 @@ public class RateCommentController {
         rateCommentDao.save(newRate);
 
         model.addAttribute("message", "Successfully added!");
+        List<RateComment> rateComments = recipe.getRateCommentList();
+        model.addAttribute("ratings", rateComments);
+        model.addAttribute("title", "Ratings and comments for " + recipe.getRecipeName());
         return "rate/message";
         //return "redirect:";
     }

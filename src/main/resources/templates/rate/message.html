@@ -2,17 +2,42 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<div class="container">
-
-    <div class="alert success">
-        <strong th:text="${message}">Success!</strong>
-        <h1></h1>
-        <td>
-            <form th:action="@{'/rate'}" method="get">
-                <button>Home</button>
-            </form>
-        </td>
+<div class="content">
+    <div class="header">
+        <h1 th:text="${title}">Default title</h1>
     </div>
+    <div class="container">
+        <div class="alert success">
+            <strong th:text="${message}">Success!</strong>
+        </div>
+    </div>
+    <td>
+        <form th:action="@{'/recipe'}" method="get">
+            <button>Home</button>
+        </form>
+    </td>
+<hr/>
+    <p th:unless="${ratings} and ${ratings.size()}">Rate/comment the recipe</p>
+    <table class="table">
+
+        <tr>
+            <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+        <tr th:each="rating : ${ratings}">
+            <td th:text="${rating.rating}"
+                th:id="${rating.id}">
+            </td>
+            <td th:text="${rating.comment}"></td>
+        </tr>
+
+    </table>
+    <hr/>
+    <td>
+        <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
+            <button>Comment here</button>
+        </form>
+    </td>
 
 
 </div>

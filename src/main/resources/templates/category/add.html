@@ -8,7 +8,10 @@
     <div class="header">
         <h2 th:text="${title}">Default title</h2>
     </div>
-
+    <form th:action="@{'/category'}" method="get">
+        <button>Home</button>
+    </form>
+    <hr/>
     <div class="rows">
         <div class="column side" style="background-color:#ccc;">
             <form method="post" style="max-width:500px;" th:object="${category}">
@@ -27,10 +30,8 @@
             </form>
         </div>
     </div>
+    <hr/>
 </div>
-<div class="sidenav">
-    <a href="/recipe/add">Add Recipe</a>
-    <!--<a href="/recipe/remove">Delete Recipe(s)</a>-->
-</div>
+
 </body>
 </html>

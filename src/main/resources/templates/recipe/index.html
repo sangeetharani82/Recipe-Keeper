@@ -56,6 +56,18 @@
         </td>
     </tr>
 </div>
+<nav th:fragment="navigation">
+    <div class="sidenav">
+        <a href="/recipe/add">Add Recipe</a>
+        <!--<a href="/recipe/remove">Delete Recipe(s)</a>-->
+        <div class="righttopnav">
+            <form action="/search/results">
+                <input name="searchTerm" type="text" placeholder="Search.." id="searchTerm"/>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 
+</nav>
 </body>
 </html>

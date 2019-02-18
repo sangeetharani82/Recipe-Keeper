@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<!--<nav th:replace="fragments :: navigation"></nav>-->
+<div class="content">
+    <div class="header">
+        <h1 th:text="${title}">Default title</h1>
+    </div>
+    <td>
+        <form th:action="@{'/recipe'}" method="get">
+            <button>Home</button>
+        </form>
+    </td>
+    <hr />
+    <p th:unless="${recipes} and ${recipes.size()}"></p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tr th:each="recipe : ${recipes}">
+        <tr>
+            <td th:text="${recipe.recipeName}"
+                th:id="${recipe.id}"></td>
+            <td>
+                <form th:action="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                    <button>View</button>
+                </form>
+            </td>
+        </tr>
+        </tr>
+
+    </table>
+    <hr />
+
+</div>
+
+
+</body>
+</html>

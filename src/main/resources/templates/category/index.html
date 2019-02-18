@@ -2,9 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<nav th:replace="fragments :: navigation"></nav>
+<!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="content">
     <div class="header">
+        <form th:action="@{'/recipe'}" method="get">
+            <button>Home</button>
+        </form>
         <h1 th:text="${title}">Default title</h1>
     </div>
 

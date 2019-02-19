@@ -1,5 +1,7 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
+import org.launchcode.RecipeKeeper.models.AddIngredientsToRecipe;
+import org.launchcode.RecipeKeeper.models.Ingredient;
 import org.launchcode.RecipeKeeper.models.Recipe;
 import org.launchcode.RecipeKeeper.models.data.CategoryDao;
 import org.launchcode.RecipeKeeper.models.data.RecipeDao;
@@ -32,15 +34,38 @@ public class SearchController {
         int count = 0;
         //int n = 0;
         ArrayList<Recipe> lists = new ArrayList<>();
+        ArrayList<Recipe> newLists = new ArrayList<>();
         for (Recipe recipe : recipeDao.findAll()) {
             if (recipe.getRecipeName().toLowerCase().contains(searchTerm.toLowerCase()) ||
-                    (recipe.getCategory().getCategoryName().toLowerCase().contains(searchTerm.toLowerCase()))) {
+                    (recipe.getCategory().getCategoryName().toLowerCase().contains(searchTerm.toLowerCase())) ||
+                    (recipe.getCourse().getCourseName().toLowerCase().contains(searchTerm.toLowerCase()))) {
                 int id = recipe.getId();
                 Recipe recipe1 = recipeDao.findOne(id);
                 lists.add(recipe1);
-                model.addAttribute("recipes", lists);
+                for(Recipe list : lists){
+                    if (!newLists.contains(list)){
+                        newLists.add(list);
+                    }
+                }
+                model.addAttribute("recipes", newLists);
                 count = count + 1;
                 model.addAttribute("title", count + " item(s) found");
+            }else{
+                for (AddIngredientsToRecipe i : recipe.getAddIngredientsToRecipes()){
+                    if (i.getIngredient().getIngredientName().toLowerCase().contains(searchTerm.toLowerCase())){
+                        int id = recipe.getId();
+                        Recipe recipe1 = recipeDao.findOne(id);
+                        lists.add(recipe1);
+                        for(Recipe list : lists){
+                            if (!newLists.contains(list)){
+                                newLists.add(list);
+                            }
+                        }
+                        model.addAttribute("recipes", newLists);
+                        count = count + 1;
+                        model.addAttribute("title", count + " item(s) found");
+                    }
+                }
             }
         }
 

@@ -4,10 +4,10 @@
 <body>
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="content">
+    <form th:action="@{'/recipe'}" method="get">
+        <button>Home</button>
+    </form>
     <div class="header">
-        <form th:action="@{'/recipe'}" method="get">
-            <button>Home</button>
-        </form>
         <h1 th:text="${title}">Default title</h1>
     </div>
     <form th:action="@{'/course/add'}" th:object="${course}" method="get">

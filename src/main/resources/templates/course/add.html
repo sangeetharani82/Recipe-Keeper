@@ -4,44 +4,23 @@
 <body>
 
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/course'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
-        <h2 th:text="${title}">Default title</h2>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <td>
-        <form th:action="@{'/course'}" method="get">
-            <button>Home</button>
-        </form>
-    </td>
     <hr/>
-    <div class="rows">
-        <div class="column side" style="background-color:#ccc;">
-            <form method="post" style="max-width:500px;" th:object="${course}">
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="courseName">Title</label>
-                    </div>
-                    <div class="col-75">
-                        <input th:field="*{courseName}" />
-                    </div>
-                    <span th:errors="*{courseName}" class="error"></span>
-                </div>
-                <!--<div class="row">
-                    <div class="col-25">
-                        <label th:for="pic">Image</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="file" name="pic" id="pic"/>
-                    </div>
-                </div>-->
-                <div class="row">
-                    <input type="submit" value="Create"/>
-                </div>
-            </form>
+    <form method="post" style="max-width:500px;" th:object="${course}">
+        <div class="form-group">
+            <label th:for="courseName">Title</label>
+            <input type="text" class="form-control" th:field="*{courseName}" />
+            <span th:errors="*{courseName}" class="error"></span>
         </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
     <hr/>
 </div>
-
 </body>
 </html>

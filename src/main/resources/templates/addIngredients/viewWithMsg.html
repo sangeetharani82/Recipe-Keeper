@@ -10,6 +10,10 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
+    <div class="alert alert-success">
+        <strong th:text="${message}">Success!</strong>
+    </div>
+
     <hr/>
 
     <p th:unless="${ingredientLists} and ${ingredientLists.size()}">No Ingredients added yet</p>

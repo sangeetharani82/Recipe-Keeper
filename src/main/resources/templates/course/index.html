@@ -3,20 +3,20 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
-    <form th:action="@{'/recipe'}" method="get">
-        <button>Home</button>
-    </form>
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
-        <h1 th:text="${title}">Default title</h1>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <form th:action="@{'/course/add'}" th:object="${course}" method="get">
-        <button style="display: inline-block;">Add a Course</button>
-    </form>
+    <a th:href="@{'/course/add'}" th:object="${course}" method="get">
+        <button class="btn btn-primary">Add a Category</button>
+    </a>
     <hr />
     <p th:unless="${courses} and ${courses.size()}">no courses :-(</p>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Name</th>
@@ -28,16 +28,15 @@
             <td th:id = "${course.id}" ><a th:href="@{'/recipe/course?id=' + ${course.id}}"
                                            th:text="${course.courseName}"></a></td>
             <td>
-                <form th:action="@{'/course/delete/'+${course.id}}" th:object="${course}" method="post">
-                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
-                </form>
+                <a th:href="@{'/course/delete/'+${course.id}}" th:object="${course}" method="post">
+                    <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')">Delete</button>
+                </a>
             </td>
         </tr>
         </tr>
     </table>
 
     <hr />
-
 </div>
 
 </body>

@@ -2,22 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<div class="container">
-
-    <div class="alert success">
+<div class="container" style="background:#FFFFF0;">
+    <div class="alert alert-success">
         <strong th:text="${message}">Success!</strong>
-        <h1></h1>
-        <td>
-            <form th:action="@{'/course'}" method="get">
-                <button>Home</button>
-            </form>
-        </td>
     </div>
-
-
+    <a th:href="@{'/course'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
+    <a th:href="@{'/course/add'}" th:object="${course}" method="get">
+        <button class="btn btn-primary">Add a Course</button>
+    </a>
 </div>
-
-
-
 </body>
 </html>

@@ -3,20 +3,25 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
+
     <div class="header">
-        <h1 th:text="${title}">Default title</h1>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <table>
-        <td>
-            <form th:action="@{'/recipe'}" method="get">
-                <button>Home</button>
-            </form>
+    <div class="btn-group">
+        <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
+            <button type="button" class="btn btn-primary">Edit ingredients</button></a>
+            <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
+                <button type="button" class="btn btn-primary">Comment here</button>
+            </a>
         </td>
-    </table>
-<hr/>
+    </div>
+    <hr/>
     <div class="single" th:each = "i : ${recipe}">
-        <table>
+        <table class="table table-striped">
             <tr>
                 <th>Title</th>
                 <td th:id="${i.id}"
@@ -64,16 +69,6 @@
         </table>
         <h5></h5>
         <hr />
-        <tr>
-            <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
-                <button>Edit ingredients</button></a>
-            </td>
-            <td>
-                <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
-                    <button>Comment here</button>
-                </form>
-            </td>
-        </tr>
     </div>
 
 </div>

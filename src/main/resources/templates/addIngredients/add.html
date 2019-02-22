@@ -4,85 +4,44 @@
 <body>
 
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
-        <h2 th:text="${title}">Default title</h2>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <form th:action="@{'/recipe'}" method="get">
-        <button>Home</button>
+
+    <hr/>
+    <form method="post" style="max-width:500px;" th:object="${add}">
+        <div class="form-group">
+            <label th:for="recipeName">Recipe</label>
+            <select class="form-control" name="recipeId" required="required">
+                <option value="">--Please choose a Recipe--</option>
+                <option th:each="recipe : ${recipes}"
+                        th:text="${recipe.recipeName}"
+                        th:value="${recipe.id}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label th:for="ingredientName">Ingredient</label>
+            <select class="form-control" name="ingredientId" required="required">
+                <option value="">--Please choose an Ingredient--</option>
+                <option th:each="ingredient : ${ingredients}"
+                        th:text="${ingredient.ingredientName}"
+                        th:value="${ingredient.id}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label th:for="quantity">Quantity</label>
+            <input type="text" class="form-control" th:field="*{quantity}" placeholder="Quantity" />
+            <span th:errors="*{quantity}" class="error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
     </form>
     <hr/>
-    <div class="rows">
-        <div class="column side" style="background-color:#ccc;">
-            <form method="post" style="max-width:500px;" th:object="${add}">
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="recipeName">Recipe</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="recipeId" required="required">
-                            <option value="">--Please choose a Recipe--</option>
-                            <option th:each="recipe : ${recipes}"
-                                    th:text="${recipe.recipeName}"
-                                    th:value="${recipe.id}">
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="ingredientName">Ingredient</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="ingredientId" required="required">
-                            <option value="">--Please choose an Ingredient--</option>
-                            <option th:each="ingredient : ${ingredients}"
-                                    th:text="${ingredient.ingredientName}"
-                                    th:value="${ingredient.id}">
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="quantity">Quantity</label>
-                    </div>
-                    <div class="col-75">
-                        <input th:field="*{quantity}" placeholder="Quantity" />
-                    </div>
-                    <span th:errors="*{quantity}" class="error"></span>
-
-                </div>
-
-
-                <!--<h1></h1>
-
-                <table>
-                    <tr>
-                    <th>Ingredients</th>
-                    <th>Quantity</th></tr>
-                <div th:each="ingredient : ${ingredients}" class="checkbox">
-
-                        <tr>
-                            <td><input type="checkbox" name="ingredientIds" th:value="${ingredient.id}"
-                                   th:id="${ingredient.id}"/>
-                            <label th:for="${ingredient.id}" th:text="${ingredient.ingredientName}"></label></td>
-
-                            <td><label th:for="quantity"></label>
-                            <input type="text" th:field="*{quantity}"
-                                   name="quantityIds"/></td>
-                        </tr>
-                </div>
-                    </table>-->
-
-                <div class="row">
-                    <input type="submit" value="Add"/>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 
 </body>

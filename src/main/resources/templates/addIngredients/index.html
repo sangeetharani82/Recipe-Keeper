@@ -3,34 +3,32 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
-    <td>
-        <form th:action="@{'/recipe'}" method="get">
-            <button>Home</button>
-        </form>
-    </td>
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
-        <h1 th:text="${title}">Default title</h1>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <hr/>
+    <div class="alert alert-success">
+        <strong th:text="${message}">Success!</strong>
+    </div>
 
-    <table class="table">
+    <a th:href="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
+        <button class="btn btn-primary">Add Ingredients To Recipe</button>
+    </a>
+    <hr/>
+    <table class="table table-striped">
         <tr th:each="recipe : ${recipes}">
         <tr>
             <td th:id="${recipe.id}" th:text="${recipe.recipeName}"></td>
             <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
-                <button>View Recipe Ingredients</button></a>
+                <button class="btn btn-primary">View Recipe Ingredients</button></a>
             </td>
         </tr>
         </tr>
     </table>
     <hr/>
-    <td>
-        <form th:action="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
-            <button>Add Ingredients To Recipe</button>
-        </form>
-    </td>
-
 </div>
 
 </body>

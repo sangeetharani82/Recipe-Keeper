@@ -4,34 +4,23 @@
 <body>
 
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/ingredient'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
-        <h2 th:text="${title} + *{ingredientName}">Default title</h2>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <td>
-        <form th:action="@{'/ingredient'}" method="get">
-            <button>Home</button>
-        </form>
-    </td>
     <hr/>
-    <div class="rows">
-        <div class="column side" style="background-color:#ccc;">
-            <form method="post" style="max-width:500px;" th:object="${ingredient}">
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="ingredientName">Title</label>
-                    </div>
-                    <div class="col-75">
-                        <input th:field="*{ingredientName}" />
-                    </div>
-                    <span th:errors="*{ingredientName}" class="error"></span>
-                </div>
-                <div class="row">
-                    <input type="submit" value="Create"/>
-                </div>
-            </form>
-        </div>
+    <div class="form-group">
+        <form method="post" style="max-width:500px;" th:object="${ingredient}">
+            <label th:for="ingredientName">Title</label>
+            <input type="text" class="form-control" th:field="*{ingredientName}" />
+            <span th:errors="*{ingredientName}" class="error"></span>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
     </div>
+    <hr/>
 </div>
 
 </body>

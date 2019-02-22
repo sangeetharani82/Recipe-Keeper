@@ -3,11 +3,11 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: navigation"></nav>
-<div class="content">
+<div class="container" style="background:#FFFFF0;">
     <div class="header">
-        <h1 th:text="${title}">Default title</h1>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-<hr/>
+    <hr/>
 
     <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
     <table class="table">
@@ -22,52 +22,41 @@
 
         </thead>
         <tr th:each="recipe : ${recipes}">
-            <tr>
-                <td th:text="${recipe.recipeName}"
-                    th:id="${recipe.id}"></td>
+        <tr>
+            <td th:text="${recipe.recipeName} "
+                th:id="${recipe.id}"></td>
+            <div class="btn-group">
                 <td>
-                    <form th:action="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button>Edit</button>
-                    </form>
+                    <a th:href="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
+                        <button type="button" class="btn btn-primary">Edit</button>
+                    </a>
                 </td>
                 <td>
-                    <form th:action="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button>View</button>
-                    </form>
+                    <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                        <button type="button" class="btn btn-primary">View</button>
+                    </a>
                 </td>
                 <td>
-                    <form th:action="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-                        <button type="submit" onClick="return confirm('Are you sure?')">Delete</button>
-                    </form>
+                    <a th:href="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+                        <button type="button" class="btn btn-primary" onClick="return confirm('Are you sure?')">Delete</button>
+                    </a>
                 </td>
                 <td  th:id="${recipe.id}"><a th:href="@{'/rate/recipe?id=' + ${recipe.id}}">
-                    <button>View Ratings</button></a></td>
-            </tr>
+                    <button type="button" class="btn btn-primary">View Ratings</button></a>
+                </td>
+            </div>
+        </tr>
         </tr>
 
     </table>
-    <tr>
-        <hr />
-        <td>
-            <h3></h3>
-            <form th:action="@{'/rate/add'}" th:object="${rate}" method="get">
-                <button>Comment here</button>
-            </form>
-        </td>
-    </tr>
-</div>
-<nav th:fragment="navigation">
-    <div class="sidenav">
-        <a href="/recipe/add">Add Recipe</a>
-        <!--<a href="/recipe/remove">Delete Recipe(s)</a>-->
-        <div class="righttopnav">
-            <form action="/search/results">
-                <input name="searchTerm" type="text" placeholder="Search Recipe.." id="searchTerm"/>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+    <hr />
+    <div class="btn-group">
+        <a href="/recipe/add">
+            <button type="button" class="btn btn-primary">Add Recipe</button></a>
+        <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
+            <button type="button" class="btn btn-primary">Comment here</button></a>
     </div>
+</div>
 
-</nav>
 </body>
 </html>

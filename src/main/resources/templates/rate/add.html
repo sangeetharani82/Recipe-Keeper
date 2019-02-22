@@ -4,66 +4,44 @@
 <body>
 
 <!--<nav th:replace="fragments :: navigation"></nav>-->
-<div class="content">
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
-        <h2 th:text="${title}">Default title</h2>
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <td>
-        <form th:action="@{'/recipe'}" method="get">
-            <button>Home</button>
-        </form>
-    </td>
+
     <hr/>
-    <div class="rows">
-        <div class="column side" style="background-color:#ccc;">
-            <form method="post" style="max-width:500px;" th:object="${rate}">
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="recipeName">Recipe</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="recipeId" required="required">
-                            <option value="">--Please choose a Recipe--</option>
-                            <option th:each="recipe : ${recipes}"
-                                    th:text="${recipe.recipeName}"
-                                    th:value="${recipe.id}">
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="rating">Rating</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="rating" id="rating">
-                            <option value="0" selected="selected">---Select---</option>
-                            <option value="*">Poor</option>
-                            <option value="**">Below Average</option>
-                            <option value="***">Average</option>
-                            <option value="****">Good</option>
-                            <option value="*****">Excellent</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label th:for="comment">Comment</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea th:field="*{comment}" placeholder="Comment" style="height:200px"></textarea>
-                    </div>
-                    <span th:errors="*{comment}" class="error"></span>
-
-                </div>
-                <div class="row">
-                    <input type="submit" value="Create"/>
-                </div>
-            </form>
+    <form method="post" style="max-width:500px;" th:object="${rate}">
+        <div class="form-group">
+            <label th:for="recipeName">Recipe</label>
+            <select class="form-control" name="recipeId" required="required">
+                <option value="">--Please choose a Recipe--</option>
+                <option th:each="recipe : ${recipes}"
+                        th:text="${recipe.recipeName}"
+                        th:value="${recipe.id}">
+                </option>
+            </select>
         </div>
-    </div>
+        <div class="form-group">
+            <label th:for="rating">Rating</label>
+            <select class="form-control" name="rating" id="rating">
+                <option value="0" selected="selected">---Select---</option>
+                <option value="1">Poor</option>
+                <option value="2">Below Average</option>
+                <option value="3">Average</option>
+                <option value="4">Good</option>
+                <option value="5">Excellent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label th:for="comment">Comment</label>
+            <textarea class="form-control" th:field="*{comment}" placeholder="Comment" style="height:200px"></textarea>
+            <span th:errors="*{comment}" class="error"></span>
+        </div>
+        <button type="submit" class="btn btn-default">Create</button>
+    </form>
 </div>
 
 </body>

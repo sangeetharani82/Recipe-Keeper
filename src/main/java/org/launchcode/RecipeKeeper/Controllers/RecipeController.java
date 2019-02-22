@@ -110,26 +110,6 @@ public class RecipeController {
         return "recipe/message";
         //return "redirect:/recipe";
     }
-//    //delete a recipe
-//    @RequestMapping(value="remove", method = RequestMethod.GET)
-//    public String displayRemoveRecipeForm(Model model){
-//        model.addAttribute("recipes", recipeDao.findAll());
-//        model.addAttribute("title", "Delete recipe(s)");
-//        return "recipe/remove";
-//    }
-//
-//    @RequestMapping(value="remove", method = RequestMethod.POST)
-//    public String processRemoveRecipeForm(@RequestParam(defaultValue = "-1") int[] recipeIds, Model model){
-//        for (int recipeId : recipeIds){
-//            if (recipeId != -1) {
-//                recipeDao.delete(recipeId);
-//                return "redirect:";
-//            }
-//        }
-//        model.addAttribute("recipes", recipeDao.findAll());
-//        model.addAttribute("title", "Delete recipe(s)");
-//        return "recipe/remove";
-//    }
 
     //Edit a recipe
     @RequestMapping(value="edit/{recipeId}", method = RequestMethod.GET)
@@ -163,13 +143,12 @@ public class RecipeController {
 
         recipeDao.save(edited);
 
-        model.addAttribute("message", "Recipe edited and saved successfully!");
+        model.addAttribute("message", "Successfully edited!");
 
         List<AddIngredientsToRecipe> lists = edited.getAddIngredientsToRecipes();
         model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
         model.addAttribute("ingredientLists", lists);
 
-        return "addIngredients/view";
-        //return "redirect:/recipe";
+        return "addIngredients/viewWithMsg";
     }
 }

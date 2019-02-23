@@ -11,7 +11,7 @@
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
     <a th:href="@{'/course/add'}" th:object="${course}" method="get">
-        <button class="btn btn-primary">Add a Category</button>
+        <button class="btn btn-primary">Add a Course</button>
     </a>
     <hr />
     <p th:unless="${courses} and ${courses.size()}">no courses :-(</p>

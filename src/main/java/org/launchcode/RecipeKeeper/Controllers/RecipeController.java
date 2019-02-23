@@ -65,7 +65,9 @@ public class RecipeController {
         recipeDao.save(newRecipe);
 
         model.addAttribute("message", "Recipe added successfully!");
-        return "addIngredients/view";
+        model.addAttribute("title", "Add ingredients to the Recipe");
+
+        return "addIngredients/viewWithMsg";
         // return "redirect:single/"+newRecipe.getId();
     }
 
@@ -78,7 +80,7 @@ public class RecipeController {
         model.addAttribute("category", recipe.getCategory());
         model.addAttribute("recipe", recipe);
         List<AddIngredientsToRecipe> lists = recipe.getAddIngredientsToRecipes();
-        model.addAttribute("title", "Ingredients needed for " + recipe.getRecipeName());
+        model.addAttribute("title", recipe.getRecipeName());
         model.addAttribute("ingredientLists", lists);
         return "recipe/single";
     }
@@ -148,7 +150,6 @@ public class RecipeController {
         List<AddIngredientsToRecipe> lists = edited.getAddIngredientsToRecipes();
         model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
         model.addAttribute("ingredientLists", lists);
-
         return "addIngredients/viewWithMsg";
     }
 }

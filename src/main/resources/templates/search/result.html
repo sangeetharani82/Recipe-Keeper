@@ -16,7 +16,7 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Details</th>
+            <th>Detail</th>
         </tr>
         </thead>
         <tr th:each="recipe : ${recipes}">
@@ -25,7 +25,7 @@
                 th:id="${recipe.id}"></td>
             <td>
                 <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-info">View</button>
                 </a>
             </td>
         </tr>

@@ -65,7 +65,7 @@ public class RecipeController {
         recipeDao.save(newRecipe);
 
         model.addAttribute("message", "Recipe added successfully!");
-        model.addAttribute("title", "Add ingredients to the Recipe");
+        model.addAttribute("title", "Add ingredients to " + newRecipe.getRecipeName());
 
         return "addIngredients/viewWithMsg";
         // return "redirect:single/"+newRecipe.getId();

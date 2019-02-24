@@ -15,7 +15,7 @@
     </div>
 
     <a th:href="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
-        <button class="btn btn-primary">Add Ingredients To Recipe</button>
+        <button class="btn btn-success">Add Ingredients To Recipe</button>
     </a>
     <hr/>
     <table class="table table-striped">
@@ -23,7 +23,7 @@
         <tr>
             <td th:id="${recipe.id}" th:text="${recipe.recipeName}"></td>
             <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
-                <button class="btn btn-primary">View Recipe Ingredients</button></a>
+                <button class="btn btn-info">View Recipe Ingredients</button></a>
             </td>
         </tr>
         </tr>

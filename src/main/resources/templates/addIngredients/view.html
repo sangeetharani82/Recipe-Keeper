@@ -14,7 +14,7 @@
 
     <p th:unless="${ingredientLists} and ${ingredientLists.size()}">No Ingredients added yet</p>
     <a th:href="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
-        <button class="btn btn-primary">Add Ingredients To Recipe</button>
+        <button class="btn btn-success">Add Ingredients To Recipe</button>
     </a>
     <table class="table table-striped">
         <tr>
@@ -31,7 +31,7 @@
                 th:text="${list.quantity}"></td>
             <td>
                 <a th:href="@{'/addIngredients/delete/'+${list.id}}" th:object="${addIngredients}" method="post">
-                    <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')">Delete</button>
+                    <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>
                 </a>
             </td>
         </tr>

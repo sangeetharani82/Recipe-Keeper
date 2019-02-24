@@ -11,7 +11,7 @@
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
     <a th:href="@{'/ingredient/add'}" th:object="${ingredient}" method="get">
-        <button class="btn btn-primary">Add an Ingredient</button>
+        <button class="btn btn-success">Add an Ingredient</button>
     </a>
     <hr />
     <p th:unless="${ingredients} and ${ingredients.size()}">no ingredients :-(</p>
@@ -29,7 +29,7 @@
                                                th:text="${ingredient.ingredientName}"></a></td>
             <td>
                 <a th:href="@{'/ingredient/delete/'+${ingredient.id}}" th:object="${ingredient}" method="post">
-                    <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')">Delete</button>
+                    <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>
                 </a>
             </td>
         </tr>

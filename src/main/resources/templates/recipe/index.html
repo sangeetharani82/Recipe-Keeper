@@ -7,6 +7,12 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
+    <div class="btn-group">
+        <a href="/recipe/add">
+            <button type="button" class="btn btn-success">Add Recipe</button></a>
+        <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
+            <button type="button" class="btn btn-primary">Comment here</button></a>
+    </div>
     <hr/>
 
     <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
@@ -33,16 +39,16 @@
                 </td>
                 <td>
                     <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button type="button" class="btn btn-primary">View</button>
+                        <button type="button" class="btn btn-info">View</button>
                     </a>
                 </td>
                 <td>
                     <a th:href="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-                        <button type="button" class="btn btn-primary" onClick="return confirm('Are you sure?')">Delete</button>
+                        <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
                     </a>
                 </td>
                 <td  th:id="${recipe.id}"><a th:href="@{'/rate/recipe?id=' + ${recipe.id}}">
-                    <button type="button" class="btn btn-primary">View Ratings</button></a>
+                    <button type="button" class="btn btn-info">View Ratings</button></a>
                 </td>
             </div>
         </tr>
@@ -50,12 +56,6 @@
 
     </table>
     <hr />
-    <div class="btn-group">
-        <a href="/recipe/add">
-            <button type="button" class="btn btn-primary">Add Recipe</button></a>
-        <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
-            <button type="button" class="btn btn-primary">Comment here</button></a>
-    </div>
 </div>
 
 </body>

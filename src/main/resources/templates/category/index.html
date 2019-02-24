@@ -12,7 +12,7 @@
     </div>
 
     <a th:href="@{'/category/add'}" th:object="${category}" method="get">
-        <button class="btn btn-primary">Add a Category</button>
+        <button class="btn btn-success">Add a Category</button>
     </a>
     <hr />
     <p th:unless="${categories} and ${categories.size()}">no categories :-(</p>
@@ -30,7 +30,7 @@
             </td>
             <td>
                 <a th:href="@{'/category/delete/'+${category.id}}" th:object="${category}" method="post">
-                    <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')">Delete</button>
+                    <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>
                 </a>
             </td>
         </tr>

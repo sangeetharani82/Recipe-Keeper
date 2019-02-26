@@ -49,7 +49,6 @@ public class AddIngredientsController {
                                             Model model, @ModelAttribute @Valid AddIngredientsToRecipe newSet,
                                             Errors errors){
         if (errors.hasErrors()){
-            model.addAttribute("title", "Add ingredients to the Recipe");
             model.addAttribute("recipes", recipeDao.findAll());
             model.addAttribute("ingredients", ingredientDao.findAll());
             return "addIngredients/add";

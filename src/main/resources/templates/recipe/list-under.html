@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
+    <div class="header">
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
+    </div>
+
+    <hr/>
+
+    <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Detail</th>
+        </tr>
+
+        </thead>
+        <tr th:each="recipe : ${recipes}">
+        <tr>
+            <td th:text="${recipe.recipeName}"
+                th:id="${recipe.id}"></td>
+            <div class="btn-group">
+                <td>
+                    <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                        <button type="button" class="btn btn-info">View</button>
+                    </a>
+                </td>
+            </div>
+        </tr>
+        </tr>
+
+    </table>
+    <hr />
+</div>
+
+</body>
+</html>

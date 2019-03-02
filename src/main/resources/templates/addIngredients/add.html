@@ -11,6 +11,9 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
+    <a th:href="@{'/ingredient/add'}" th:object="${ingredient}" method="get">
+        <button class="btn btn-success">Create an Ingredient</button>
+    </a>
 
     <hr/>
     <form method="post" style="max-width:500px;" th:object="${add}">

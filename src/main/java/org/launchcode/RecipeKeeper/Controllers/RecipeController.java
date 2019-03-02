@@ -91,8 +91,8 @@ public class RecipeController {
         Course cor = courseDao.findOne(id);
         List<Recipe> recipes = cor.getRecipes();
         model.addAttribute("recipes", recipes);
-        model.addAttribute("title", cor.getCourseName() + " Recipes");
-        return "recipe/index";
+        model.addAttribute("title", cor.getCourseName() + " recipes");
+        return "recipe/list-under";
     }
     //recipes in a category
     @RequestMapping(value = "category", method = RequestMethod.GET)
@@ -100,8 +100,8 @@ public class RecipeController {
         Category cat = categoryDao.findOne(id);
         List<Recipe> recipes = cat.getRecipes();
         model.addAttribute("recipes", recipes);
-        model.addAttribute("title", cat.getCategoryName() + " Recipes");
-        return "recipe/index";
+        model.addAttribute("title", cat.getCategoryName() + " recipes");
+        return "recipe/list-under";
     }
 
     // delete each recipe instantly

@@ -1,7 +1,7 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
+import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
 import org.launchcode.RecipeKeeper.models.AddIngredientsToRecipe;
-import org.launchcode.RecipeKeeper.models.Ingredient;
 import org.launchcode.RecipeKeeper.models.Recipe;
 import org.launchcode.RecipeKeeper.models.data.CategoryDao;
 import org.launchcode.RecipeKeeper.models.data.RecipeDao;
@@ -22,6 +22,8 @@ public class SearchController {
 
     @Autowired
     private RecipeDao recipeDao;
+
+    RecipeComparator recipeComparator = new RecipeComparator();
 
     @RequestMapping(value="")
     public String index(Model model){
@@ -47,6 +49,7 @@ public class SearchController {
                         newLists.add(list);
                     }
                 }
+                newLists.sort(recipeComparator);
                 model.addAttribute("recipes", newLists);
                 count = count + 1;
                 model.addAttribute("title", count + " item(s) found");
@@ -61,6 +64,7 @@ public class SearchController {
                                 newLists.add(list);
                             }
                         }
+                        newLists.sort(recipeComparator);
                         model.addAttribute("recipes", newLists);
                         count = count + 1;
                         model.addAttribute("title", count + " item(s) found");

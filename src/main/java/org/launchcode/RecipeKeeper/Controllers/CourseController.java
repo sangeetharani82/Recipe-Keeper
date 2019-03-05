@@ -1,6 +1,7 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
 import org.hibernate.annotations.Cache;
+import org.launchcode.RecipeKeeper.Comparator.CourseComparator;
 import org.launchcode.RecipeKeeper.models.Category;
 import org.launchcode.RecipeKeeper.models.Course;
 import org.launchcode.RecipeKeeper.models.Recipe;
@@ -14,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,10 +28,17 @@ public class CourseController {
     @Autowired
     private RecipeDao recipeDao;
 
+    CourseComparator courseComparator = new CourseComparator();
+
     @RequestMapping(value="")
     public String index(Model model){
+        ArrayList<Course> lists = new ArrayList<>();
+        for (Course course : courseDao.findAll()){
+            lists.add(course);
+        }
+        lists.sort(courseComparator);
         model.addAttribute("title", "Courses");
-        model.addAttribute("courses", courseDao.findAll());
+        model.addAttribute("courses", lists);
         return "course/index";
     }
 

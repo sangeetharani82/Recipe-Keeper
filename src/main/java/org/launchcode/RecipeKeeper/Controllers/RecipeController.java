@@ -1,5 +1,6 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
+import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
 import org.launchcode.RecipeKeeper.models.AddIngredientsToRecipe;
 import org.launchcode.RecipeKeeper.models.Category;
 import org.launchcode.RecipeKeeper.models.Course;
@@ -14,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,11 +31,17 @@ public class RecipeController {
     @Autowired
     CategoryDao categoryDao;
 
+    RecipeComparator recipeComparator = new RecipeComparator();
+
     // Request path: /recipe
     @RequestMapping(value = "")
     public String index(Model model) {
-
-        model.addAttribute("recipes", recipeDao.findAll());
+        ArrayList<Recipe> lists = new ArrayList<>();
+        for (Recipe recipe : recipeDao.findAll()){
+            lists.add(recipe);
+        }
+        lists.sort(recipeComparator);
+        model.addAttribute("recipes", lists);
         model.addAttribute("title", "Recipes");
         return "recipe/index";
     }

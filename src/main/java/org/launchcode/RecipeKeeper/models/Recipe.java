@@ -126,4 +126,8 @@ public class Recipe {
 
         ingredientAndQuantities.add(item);
     }
+
+    public void deleteIngredientAndQuantityList(IngredientAndQuantity item){
+        ingredientAndQuantities.remove(item);
+    }
 }

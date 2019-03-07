@@ -157,6 +157,15 @@ public class RecipeController {
         //return "redirect:/recipe";
     }
 
+    //delete the ingredient and quantity from the recipe
+    @RequestMapping(value = "remove/{ingredientAndQuantityId}")
+    public String removeIngredientAndQuantity(@PathVariable int ingredientAndQuantityId, Model model){
+        IngredientAndQuantity ingredientAndQuantity = ingredientAndQuantityDao.findOne(ingredientAndQuantityId);
+        ingredientAndQuantityDao.delete(ingredientAndQuantity);
+        model.addAttribute("message", "Ingredient and Quantity removed successfully");
+        return "recipe/message";
+    }
+
     //Edit a recipe
     @RequestMapping(value="edit/{recipeId}", method = RequestMethod.GET)
     public String displayEditRecipeForm(Model model, @PathVariable int recipeId){

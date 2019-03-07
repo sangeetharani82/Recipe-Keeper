@@ -29,6 +29,11 @@
         <tr th:each="ingredientAndQuantity : ${ingredientsAndQuantity}">
             <td th:id="${ingredientAndQuantity.id}" th:text="${ingredientAndQuantity.ingredient.ingredientName}"></td>
             <td th:text="${ingredientAndQuantity.amount}"></td>
+        <td>
+            <a th:href="@{'/recipe/remove/'+ ${ingredientAndQuantity.id}}" th:object="${recipe}" method="post">
+                <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>
+            </a>
+        </td>
         </tr>
         </tr>
     </table>

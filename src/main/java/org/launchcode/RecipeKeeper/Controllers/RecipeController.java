@@ -1,13 +1,9 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
 import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
-import org.launchcode.RecipeKeeper.models.AddIngredientsToRecipe;
-import org.launchcode.RecipeKeeper.models.Category;
-import org.launchcode.RecipeKeeper.models.Course;
-import org.launchcode.RecipeKeeper.models.Recipe;
-import org.launchcode.RecipeKeeper.models.data.CategoryDao;
-import org.launchcode.RecipeKeeper.models.data.CourseDao;
-import org.launchcode.RecipeKeeper.models.data.RecipeDao;
+import org.launchcode.RecipeKeeper.models.*;
+import org.launchcode.RecipeKeeper.models.data.*;
+import org.launchcode.RecipeKeeper.models.forms.AddIngredientAndQuantityToRecipeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +23,12 @@ public class RecipeController {
 
     @Autowired
     CourseDao courseDao;
+
+    @Autowired
+    IngredientDao ingredientDao;
+
+    @Autowired
+    IngredientAndQuantityDao ingredientAndQuantityDao;
 
     @Autowired
     CategoryDao categoryDao;
@@ -75,8 +77,43 @@ public class RecipeController {
         model.addAttribute("message", "Recipe added successfully!");
         model.addAttribute("title", "Add ingredients to " + newRecipe.getRecipeName());
 
-        return "addIngredients/viewWithMsg";
-        // return "redirect:single/"+newRecipe.getId();
+        return "redirect:view/" + newRecipe.getId();
+    }
+
+    @RequestMapping(value="view/{id}", method = RequestMethod.GET)
+    public String view(@PathVariable int id, Model model){
+        Recipe recipe = recipeDao.findOne(id);
+        model.addAttribute("title", recipe.getRecipeName());
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("message", "Added successfully!");
+        return "recipe/view";
+    }
+
+    @RequestMapping(value = "add-ingredient/{recipeId}", method = RequestMethod.GET)
+    public String displayAddIngredientAndQuantityForm(@PathVariable int recipeId, Model model){
+        Recipe recipe = recipeDao.findOne(recipeId);
+        AddIngredientAndQuantityToRecipeForm form = new AddIngredientAndQuantityToRecipeForm(recipe, ingredientDao.findAll());
+        model.addAttribute("title", "Add Ingredient and Quantity to "+recipe.getRecipeName());
+        model.addAttribute("form", form);
+        model.addAttribute("ingredients", ingredientDao.findAll());
+        return "recipe/add-ingredient";
+    }
+
+    @RequestMapping(value = "add-ingredient", method = RequestMethod.POST)
+    public String processAddIngredientAndQuantityForm(Model model, @ModelAttribute @Valid AddIngredientAndQuantityToRecipeForm form,
+                                                      Errors errors){
+        if (errors.hasErrors()){
+            model.addAttribute("form", form);
+            return "recipe/add-ingredient";
+        }
+
+        Recipe recipe = recipeDao.findOne(form.getRecipeId());
+        Ingredient theIngredient = ingredientDao.findOne(form.getIngredientId());
+        IngredientAndQuantity ingredientAndQuantity = new IngredientAndQuantity(recipe, theIngredient, form.getAmount());
+        recipe.setIngredientAndQuantityList(ingredientAndQuantity);
+        ingredientAndQuantityDao.save(ingredientAndQuantity);
+        recipeDao.save(recipe);
+        return "redirect:view/"+ recipe.getId();
     }
 
     //view single recipe
@@ -87,9 +124,8 @@ public class RecipeController {
         model.addAttribute("course", recipe.getCourse());
         model.addAttribute("category", recipe.getCategory());
         model.addAttribute("recipe", recipe);
-        List<AddIngredientsToRecipe> lists = recipe.getAddIngredientsToRecipes();
         model.addAttribute("title", recipe.getRecipeName());
-        model.addAttribute("ingredientLists", lists);
+        model.addAttribute("ingredientLists", recipe.getIngredientAndQuantities());
         return "recipe/single";
     }
 
@@ -154,10 +190,9 @@ public class RecipeController {
         recipeDao.save(edited);
 
         model.addAttribute("message", "Successfully edited!");
-
-        List<AddIngredientsToRecipe> lists = edited.getAddIngredientsToRecipes();
+        model.addAttribute("recipe", edited);
         model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
-        model.addAttribute("ingredientLists", lists);
-        return "addIngredients/viewWithMsg";
+        model.addAttribute("ingredientLists", edited.getIngredientAndQuantities());
+        return "recipe/view";
     }
 }

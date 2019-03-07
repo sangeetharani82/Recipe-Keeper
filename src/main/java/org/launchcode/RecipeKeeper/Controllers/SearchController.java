@@ -1,7 +1,7 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
 import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
-import org.launchcode.RecipeKeeper.models.AddIngredientsToRecipe;
+import org.launchcode.RecipeKeeper.models.IngredientAndQuantity;
 import org.launchcode.RecipeKeeper.models.Recipe;
 import org.launchcode.RecipeKeeper.models.data.CategoryDao;
 import org.launchcode.RecipeKeeper.models.data.RecipeDao;
@@ -54,7 +54,7 @@ public class SearchController {
                 count = count + 1;
                 model.addAttribute("title", count + " item(s) found");
             }else{
-                for (AddIngredientsToRecipe i : recipe.getAddIngredientsToRecipes()){
+                for (IngredientAndQuantity i : recipe.getIngredientAndQuantities()){
                     if (i.getIngredient().getIngredientName().toLowerCase().contains(searchTerm.toLowerCase())){
                         int id = recipe.getId();
                         Recipe recipe1 = recipeDao.findOne(id);

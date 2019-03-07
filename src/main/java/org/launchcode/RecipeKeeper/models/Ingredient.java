@@ -19,7 +19,7 @@ public class Ingredient {
 
     @OneToMany
     @JoinColumn(name = "ingredient_id")
-    private List<AddIngredientsToRecipe> addIngredientsToRecipes = new ArrayList<>();
+    private List<IngredientAndQuantity> ingredientAndQuantities = new ArrayList<>();
 
     public Ingredient(){}
 
@@ -39,7 +39,7 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
-    public List<AddIngredientsToRecipe> getAddIngredientsToRecipes() {
-        return addIngredientsToRecipes;
+    public List<IngredientAndQuantity> getIngredientAndQuantities() {
+        return ingredientAndQuantities;
     }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<!--<nav th:replace="fragments :: navigation"></nav>-->
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
+    <div class="header">
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
+    </div>
+
+    <hr/>
+
+    <form method="post" style="max-width:500px;" th:object="${form}" action="/recipe/add-ingredient">
+
+        <div class="form-group">
+            <label th:for="ingredientName">Ingredient</label>
+            <select class="form-control" name="ingredientId" required="required">
+                <option value="">--Choose an ingredient--</option>
+                <option th:each="ingredient : ${ingredients}"
+                        th:text="${ingredient.ingredientName}"
+                        th:value="${ingredient.id}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label th:for="amount">Quantity</label>
+            <input type="text" class="form-control" th:field="*{amount}" placeholder="Quantity" />
+            <span th:errors="*{amount}" class="error"></span>
+        </div>
+
+        <input type="hidden" name="recipeId" th:value="*{recipe.id}" />
+
+
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <hr/>
+</div>
+
+</body>
+</html>

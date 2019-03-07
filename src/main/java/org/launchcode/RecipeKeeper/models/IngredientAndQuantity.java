@@ -7,38 +7,42 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class AddIngredientsToRecipe {
+public class IngredientAndQuantity {
 
     @Id
     @GeneratedValue
     private int id;
 
     @NotNull
-    private String quantity;
-
     @ManyToOne
     private Recipe recipe;
 
+    @NotNull
     @ManyToOne
     private Ingredient ingredient;
 
-    public AddIngredientsToRecipe(String quantity) {
-        this.quantity = quantity;
+    @NotNull
+    private String amount;
+
+    public IngredientAndQuantity(Recipe recipe, Ingredient ingredient, String amount) {
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+        this.amount = amount;
     }
 
-    public AddIngredientsToRecipe() {
+    public IngredientAndQuantity() {
     }
 
     public int getId() {
         return id;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
     public Recipe getRecipe() {

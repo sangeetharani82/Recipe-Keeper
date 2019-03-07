@@ -10,30 +10,30 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-
+    <div class="alert alert-success">
+        <strong th:text="${message}">Success!</strong>
+    </div>
+    <a th:href="'/recipe/add-items/' + ${recipe.id}">
+        <button class="btn btn-success">Add Ingredients To Recipe</button>
+    </a>
     <hr/>
+    <p th:unless="${recipe.rateCommentList.size()}">No Ratings</p>
 
-    <p th:unless="${ratings} and ${ratings.size()}">No comments yet</p>
-    <table class="table table-striped">
-
+    <table class="table">
         <tr>
             <th>Rating</th>
             <th>Comment</th>
         </tr>
+
+        <tr th:each="ratings : ${recipe.rateCommentList}">
         <tr th:each="rating : ${ratings}">
-            <td th:text="${rating.rating}"
-                th:id="${rating.id}">
-            </td>
+            <td th:id="${rating.id}" th:text="${rating.rating}"></td>
             <td th:text="${rating.comment}"></td>
         </tr>
-
+        </tr>
     </table>
-    <td>
-        <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
-            <button class="btn btn-primary">Comment here</button>
-        </a>
-    </td>
 
+    <hr/>
 </div>
 
 </body>

@@ -12,11 +12,9 @@
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
     <div class="btn-group">
-        <!--<td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
-            <button type="button" class="btn btn-primary">Edit ingredients</button></a>-->
-            <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
-                <button type="button" class="btn btn-primary">Comment here</button>
-            </a>
+        <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
+            <button type="button" class="btn btn-info">Comment</button></a>
+        </td>
     </div>
     <hr/>
     <div class="single" th:each = "i : ${recipe}">

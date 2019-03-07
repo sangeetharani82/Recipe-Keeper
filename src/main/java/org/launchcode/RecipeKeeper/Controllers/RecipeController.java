@@ -1,15 +1,20 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
+import org.launchcode.RecipeKeeper.Comparator.CategoryComparator;
+import org.launchcode.RecipeKeeper.Comparator.CourseComparator;
+import org.launchcode.RecipeKeeper.Comparator.IngredientComparator;
 import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
 import org.launchcode.RecipeKeeper.models.*;
 import org.launchcode.RecipeKeeper.models.data.*;
 import org.launchcode.RecipeKeeper.models.forms.AddIngredientAndQuantityToRecipeForm;
+import org.launchcode.RecipeKeeper.models.forms.AddRateCommentToRecipeForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +36,15 @@ public class RecipeController {
     IngredientAndQuantityDao ingredientAndQuantityDao;
 
     @Autowired
+    RateCommentDao rateCommentDao;
+
+    @Autowired
     CategoryDao categoryDao;
 
     RecipeComparator recipeComparator = new RecipeComparator();
+    CourseComparator courseComparator = new CourseComparator();
+    CategoryComparator categoryComparator = new CategoryComparator();
+    IngredientComparator ingredientComparator = new IngredientComparator();
 
     // Request path: /recipe
     @RequestMapping(value = "")
@@ -53,8 +64,20 @@ public class RecipeController {
     public String displayAddRecipeForm(Model model) {
         model.addAttribute("title", "Add a recipe");
         model.addAttribute(new Recipe());
-        model.addAttribute("courses", courseDao.findAll());
-        model.addAttribute("categories", categoryDao.findAll());
+        ArrayList<Course> courses = new ArrayList<>();
+        for (Course course : courseDao.findAll()){
+            courses.add(course);
+        }
+        courses.sort(courseComparator);
+
+        ArrayList<Category> categories = new ArrayList<>();
+        for (Category category : categoryDao.findAll()){
+            categories.add(category);
+        }
+        categories.sort(categoryComparator);
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("categories", categories);
         return "recipe/add";
     }
 
@@ -64,8 +87,20 @@ public class RecipeController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a recipe");
-            model.addAttribute("courses", courseDao.findAll());
-            model.addAttribute("categories", categoryDao.findAll());
+            ArrayList<Course> courses = new ArrayList<>();
+            for (Course course : courseDao.findAll()){
+                courses.add(course);
+            }
+            courses.sort(courseComparator);
+
+            ArrayList<Category> categories = new ArrayList<>();
+            for (Category category : categoryDao.findAll()){
+                categories.add(category);
+            }
+            categories.sort(categoryComparator);
+
+            model.addAttribute("courses", courses);
+            model.addAttribute("categories", categories);
             return "recipe/add";
         }
         Course cor = courseDao.findOne(courseId);
@@ -95,7 +130,13 @@ public class RecipeController {
         AddIngredientAndQuantityToRecipeForm form = new AddIngredientAndQuantityToRecipeForm(recipe, ingredientDao.findAll());
         model.addAttribute("title", "Add Ingredient and Quantity to "+recipe.getRecipeName());
         model.addAttribute("form", form);
-        model.addAttribute("ingredients", ingredientDao.findAll());
+
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        for (Ingredient ingredient : ingredientDao.findAll()){
+            ingredients.add(ingredient);
+        }
+        ingredients.sort(ingredientComparator);
+        model.addAttribute("ingredients", ingredients);
         return "recipe/add-ingredient";
     }
 
@@ -171,8 +212,20 @@ public class RecipeController {
     public String displayEditRecipeForm(Model model, @PathVariable int recipeId){
         model.addAttribute(recipeDao.findOne(recipeId));
         model.addAttribute("title", "Edit " + recipeDao.findOne(recipeId).getRecipeName());
-        model.addAttribute("courses", courseDao.findAll());
-        model.addAttribute("categories", categoryDao.findAll());
+        ArrayList<Course> courses = new ArrayList<>();
+        for (Course course : courseDao.findAll()){
+            courses.add(course);
+        }
+        courses.sort(courseComparator);
+
+        ArrayList<Category> categories = new ArrayList<>();
+        for (Category category : categoryDao.findAll()){
+            categories.add(category);
+        }
+        categories.sort(categoryComparator);
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("categories", categories);
         return "recipe/edit";
     }
 
@@ -203,5 +256,49 @@ public class RecipeController {
         model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
         model.addAttribute("ingredientLists", edited.getIngredientAndQuantities());
         return "recipe/view";
+    }
+
+    @RequestMapping(value = "add-rating/{recipeId}", method = RequestMethod.GET)
+    public String displayAddRatingForm(@PathVariable int recipeId, Model model){
+        String rating = "";
+        String comment = "";
+        Recipe recipe = recipeDao.findOne(recipeId);
+        AddRateCommentToRecipeForm rateForm = new AddRateCommentToRecipeForm(recipe, rating, comment);
+        model.addAttribute("title", "Rate and Comment "+recipe.getRecipeName());
+        model.addAttribute("form", rateForm);
+        return "recipe/add-rating";
+    }
+
+    @RequestMapping(value = "add-rating", method = RequestMethod.POST)
+    public String processAddRatingForm(Model model, @ModelAttribute @Valid AddRateCommentToRecipeForm rateForm,
+                                       Errors errors){
+        if (errors.hasErrors()){
+            model.addAttribute("form", rateForm);
+            return "recipe/add-rating";
+        }
+        Recipe recipe = recipeDao.findOne(rateForm.getRecipeId());
+        RateComment rateComment = new RateComment(recipe, rateForm.getRating(), rateForm.getComment());
+        recipe.setRateCommentList(rateComment);
+        rateCommentDao.save(rateComment);
+        recipeDao.save(recipe);
+        return "redirect:view-ratingWithMsg/"+ recipe.getId();
+    }
+
+    @RequestMapping(value="view-ratingWithMsg/{id}", method = RequestMethod.GET)
+    public String viewRatingWithSuccessMsg(@PathVariable int id, Model model){
+        Recipe recipe = recipeDao.findOne(id);
+        model.addAttribute("title", recipe.getRecipeName());
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("message", "Added successfully!");
+        return "recipe/view-ratingWithMsg";
+    }
+
+    @RequestMapping(value="view-rating/{id}", method = RequestMethod.GET)
+    public String viewRating(@PathVariable int id, Model model){
+        Recipe recipe = recipeDao.findOne(id);
+        model.addAttribute("title", recipe.getRecipeName());
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("message", "Added successfully!");
+        return "recipe/view-rating";
     }
 }

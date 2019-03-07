@@ -118,6 +118,10 @@ public class Recipe {
         return rateCommentList;
     }
 
+    public void setRateCommentList(RateComment rating) {
+        rateCommentList.add(rating);
+    }
+
     public List<IngredientAndQuantity> getIngredientAndQuantities() {
         return ingredientAndQuantities;
     }
@@ -125,9 +129,5 @@ public class Recipe {
     public void setIngredientAndQuantityList(IngredientAndQuantity item) {
 
         ingredientAndQuantities.add(item);
-    }
-
-    public void deleteIngredientAndQuantityList(IngredientAndQuantity item){
-        ingredientAndQuantities.remove(item);
     }
 }

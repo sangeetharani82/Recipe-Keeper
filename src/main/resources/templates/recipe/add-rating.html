@@ -13,17 +13,9 @@
     </div>
 
     <hr/>
-    <form method="post" style="max-width:500px;" th:object="${rate}">
-        <div class="form-group">
-            <label th:for="recipeName">Recipe</label>
-            <select class="form-control" name="recipeId" required="required">
-                <option value="">--Please choose a Recipe--</option>
-                <option th:each="recipe : ${recipes}"
-                        th:text="${recipe.recipeName}"
-                        th:value="${recipe.id}">
-                </option>
-            </select>
-        </div>
+
+    <form method="post" style="max-width:500px;" th:object="${form}" action="/recipe/add-rating">
+
         <div class="form-group">
             <label th:for="rating">Rating</label>
             <select class="form-control" name="rating" id="rating">
@@ -34,14 +26,17 @@
                 <option value="4">Good</option>
                 <option value="5">Excellent</option>
             </select>
+
+            <div class="form-group">
+                <label th:for="comment">Comment</label>
+                <textarea class="form-control" th:field="*{comment}"></textarea>
+                <span th:errors="*{comment}" class="error"></span>
+            </div>
+            <input type="hidden" name="recipeId" th:value="*{recipe.id}"/>
         </div>
-        <div class="form-group">
-            <label th:for="comment">Comment</label>
-            <textarea class="form-control" th:field="*{comment}" placeholder="Comment" style="height:200px"></textarea>
-            <span th:errors="*{comment}" class="error"></span>
-        </div>
-        <button type="submit" class="btn btn-success">Create</button>
+        <button type="submit" class="btn btn-success">Add</button>
     </form>
+    <hr/>
 </div>
 
 </body>

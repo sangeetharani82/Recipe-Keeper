@@ -10,24 +10,27 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
-    <div class="alert alert-success">
-        <strong th:text="${message}">Success!</strong>
-    </div>
 
-    <a th:href="@{'/addIngredients/add'}" th:object="${addIngredients}" method="get">
+    <a th:href="'/recipe/add-items/' + ${recipe.id}">
         <button class="btn btn-success">Add Ingredients To Recipe</button>
     </a>
     <hr/>
-    <table class="table table-striped">
-        <tr th:each="recipe : ${recipes}">
+    <p th:unless="${recipe.rateCommentList.size()}">No Ratings</p>
+
+    <table class="table">
         <tr>
-            <td th:id="${recipe.id}" th:text="${recipe.recipeName}"></td>
-            <td  th:id="${recipe.id}"><a th:href="@{'/addIngredients/recipe?id=' + ${recipe.id}}">
-                <button class="btn btn-info">View Recipe Ingredients</button></a>
-            </td>
+            <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+
+        <tr th:each="ratings : ${recipe.rateCommentList}">
+        <tr th:each="rating : ${ratings}">
+            <td th:id="${rating.id}" th:text="${rating.rating}"></td>
+            <td th:text="${rating.comment}"></td>
         </tr>
         </tr>
     </table>
+
     <hr/>
 </div>
 

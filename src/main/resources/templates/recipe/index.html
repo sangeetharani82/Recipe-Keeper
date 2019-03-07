@@ -10,8 +10,6 @@
     <div class="btn-group">
         <a href="/recipe/add">
             <button type="button" class="btn btn-success">Add Recipe</button></a>
-        <a th:href="@{'/rate/add'}" th:object="${rate}" method="get">
-            <button type="button" class="btn btn-primary">Comment here</button></a>
     </div>
     <hr/>
 
@@ -23,7 +21,8 @@
             <th>Modify</th>
             <th>Detail</th>
             <th>Remove</th>
-            <th>View Ratings/comments</th>
+            <th>View Ratings</th>
+            <th>Comment</th>
         </tr>
 
         </thead>
@@ -47,8 +46,11 @@
                         <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
                     </a>
                 </td>
-                <td  th:id="${recipe.id}"><a th:href="@{'/rate/recipe?id=' + ${recipe.id}}">
+                <td  th:id="${recipe.id}"><a th:href="@{'/recipe/view-rating/' + ${recipe.id}}">
                     <button type="button" class="btn btn-info">View Ratings</button></a>
+                </td>
+                <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
+                    <button type="button" class="btn btn-info">Comment</button></a>
                 </td>
             </div>
         </tr>

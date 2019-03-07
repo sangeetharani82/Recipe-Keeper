@@ -15,15 +15,17 @@ public class RateComment {
     private int id;
 
     @NotNull
+    @ManyToOne
+    private Recipe recipe;
+
+    @NotNull
     private String rating;
 
     @NotNull
     private String comment;
 
-    @ManyToOne
-    private Recipe recipe;
-
-    public RateComment(String rating, String comment) {
+    public RateComment(Recipe recipe, String rating, String comment) {
+        this.recipe = recipe;
         this.rating = rating;
         this.comment = comment;
     }

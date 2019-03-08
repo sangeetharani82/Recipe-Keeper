@@ -118,7 +118,7 @@ public class RecipeController {
     @RequestMapping(value="view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable int id, Model model){
         Recipe recipe = recipeDao.findOne(id);
-        model.addAttribute("title", recipe.getRecipeName());
+        model.addAttribute("title", "Ingredients needed for " + recipe.getRecipeName());
         model.addAttribute("recipe", recipe);
         model.addAttribute("message", "Added successfully!");
         return "recipe/view";
@@ -298,7 +298,6 @@ public class RecipeController {
         Recipe recipe = recipeDao.findOne(id);
         model.addAttribute("title", recipe.getRecipeName());
         model.addAttribute("recipe", recipe);
-        model.addAttribute("message", "Added successfully!");
         return "recipe/view-rating";
     }
 }

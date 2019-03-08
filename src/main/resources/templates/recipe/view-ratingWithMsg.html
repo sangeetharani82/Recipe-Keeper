@@ -13,9 +13,7 @@
     <div class="alert alert-success">
         <strong th:text="${message}">Success!</strong>
     </div>
-    <a th:href="'/recipe/add-items/' + ${recipe.id}">
-        <button class="btn btn-success">Add Ingredients To Recipe</button>
-    </a>
+
     <hr/>
     <p th:unless="${recipe.rateCommentList.size()}">No Ratings</p>
 

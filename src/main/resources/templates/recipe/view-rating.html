@@ -11,9 +11,6 @@
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
 
-    <a th:href="'/recipe/add-items/' + ${recipe.id}">
-        <button class="btn btn-success">Add Ingredients To Recipe</button>
-    </a>
     <hr/>
     <p th:unless="${recipe.rateCommentList.size()}">No Ratings</p>
 

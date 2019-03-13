@@ -1,9 +1,9 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
-import org.launchcode.RecipeKeeper.Comparator.CategoryComparator;
-import org.launchcode.RecipeKeeper.Comparator.CourseComparator;
-import org.launchcode.RecipeKeeper.Comparator.IngredientComparator;
-import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
+import org.launchcode.RecipeKeeper.Comparators.CategoryComparator;
+import org.launchcode.RecipeKeeper.Comparators.CourseComparator;
+import org.launchcode.RecipeKeeper.Comparators.IngredientComparator;
+import org.launchcode.RecipeKeeper.Comparators.RecipeComparator;
 import org.launchcode.RecipeKeeper.models.*;
 import org.launchcode.RecipeKeeper.models.data.*;
 import org.launchcode.RecipeKeeper.models.forms.AddIngredientAndQuantityToRecipeForm;
@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;

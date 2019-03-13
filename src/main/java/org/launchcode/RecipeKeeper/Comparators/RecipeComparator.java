@@ -1,4 +1,4 @@
-package org.launchcode.RecipeKeeper.Comparator;
+package org.launchcode.RecipeKeeper.Comparators;
 
 import org.launchcode.RecipeKeeper.models.Recipe;
 

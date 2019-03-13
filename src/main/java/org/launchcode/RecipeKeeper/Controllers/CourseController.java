@@ -1,11 +1,7 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
-import org.hibernate.annotations.Cache;
-import org.launchcode.RecipeKeeper.Comparator.CourseComparator;
-import org.launchcode.RecipeKeeper.models.Category;
+import org.launchcode.RecipeKeeper.Comparators.CourseComparator;
 import org.launchcode.RecipeKeeper.models.Course;
-import org.launchcode.RecipeKeeper.models.Recipe;
-import org.launchcode.RecipeKeeper.models.data.CategoryDao;
 import org.launchcode.RecipeKeeper.models.data.CourseDao;
 import org.launchcode.RecipeKeeper.models.data.RecipeDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "course")

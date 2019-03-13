@@ -1,6 +1,6 @@
 package org.launchcode.RecipeKeeper.Controllers;
 
-import org.launchcode.RecipeKeeper.Comparator.RecipeComparator;
+import org.launchcode.RecipeKeeper.Comparators.RecipeComparator;
 import org.launchcode.RecipeKeeper.models.IngredientAndQuantity;
 import org.launchcode.RecipeKeeper.models.Recipe;
 import org.launchcode.RecipeKeeper.models.data.CategoryDao;

@@ -9,7 +9,7 @@
         <button class="btn btn-default">Home</button>
     </form>
     <div class="header">
-        <center style="font-size:30px;" th:text="${title}">Default title</center>
+        <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <hr/>
     <form method="post" style="max-width:500px;" th:object="${recipe}">
@@ -22,9 +22,9 @@
             <label th:for="courseName">Course</label>
             <select class="form-control" name="courseId">
                 <option th:value="*{course.id}"
-                        th:text="*{course.courseName}"></option>
+                        th:text="*{#strings.capitalize(course.courseName)}"></option>
                 <option th:each="course : ${courses}"
-                        th:text="${course.courseName}"
+                        th:text="${#strings.capitalize(course.courseName)}"
                         th:value="${course.id}">
                 </option>
             </select>
@@ -33,9 +33,9 @@
             <label th:for="category">Category</label>
             <select class="form-control" name="categoryId" required="required">
                 <option th:value="*{category.id}"
-                        th:text="*{category.categoryName}"></option>
+                        th:text="*{#strings.capitalize(category.categoryName)}"></option>
                 <option th:each="category : ${categories}"
-                        th:text="${category.categoryName}"
+                        th:text="${#strings.capitalize(category.categoryName)}"
                         th:value="${category.id}">
                 </option>
             </select>

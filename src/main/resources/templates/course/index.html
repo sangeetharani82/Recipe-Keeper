@@ -26,7 +26,7 @@
         <tr th:each="course : ${courses}">
         <tr>
             <td th:id = "${course.id}" ><a th:href="@{'/recipe/course?id=' + ${course.id}}"
-                                           th:text="${course.courseName}"></a></td>
+                                           th:text="${#strings.capitalize(course.courseName)}"></a></td>
             <td>
                 <a th:href="@{'/course/delete/'+${course.id}}" th:object="${course}" method="post">
                     <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>

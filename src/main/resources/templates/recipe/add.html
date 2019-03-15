@@ -9,7 +9,7 @@
         <button class="btn btn-default">Home</button>
     </a>
     <div class="header">
-        <center style="font-size:30px;" th:text="${title}">Default title</center>
+        <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
 
     <hr/>
@@ -24,7 +24,7 @@
             <select class="form-control" name="courseId" required="required">
                 <option value="">--Please choose a Course--</option>
                 <option th:each="course : ${courses}"
-                        th:text="${course.courseName}"
+                        th:text="${#strings.capitalize(course.courseName)}"
                         th:value="${course.id}">
                 </option>
             </select>
@@ -34,7 +34,7 @@
             <select class="form-control" name="categoryId" required="required">
                 <option value="">--Please choose a Category--</option>
                 <option th:each="category : ${categories}"
-                        th:text="${category.categoryName}"
+                        th:text="${#strings.capitalize(category.categoryName)}"
                         th:value="${category.id}">
                 </option>
             </select>

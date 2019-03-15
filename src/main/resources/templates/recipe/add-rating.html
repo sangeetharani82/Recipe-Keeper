@@ -9,7 +9,7 @@
         <button class="btn btn-default">Home</button>
     </a>
     <div class="header">
-        <center style="font-size:30px;" th:text="${title}">Default title</center>
+        <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
 
     <hr/>

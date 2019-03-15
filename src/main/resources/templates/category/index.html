@@ -26,7 +26,7 @@
         </thead>
         <tr th:each="category : ${categories}">
         <tr>
-            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}" th:text="${category.categoryName}"></a>
+            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}" th:text="${#strings.capitalize(category.categoryName)}"></a>
             </td>
             <td>
                 <a th:href="@{'/category/delete/'+${category.id}}" th:object="${category}" method="post">

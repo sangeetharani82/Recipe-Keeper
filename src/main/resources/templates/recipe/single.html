@@ -9,7 +9,7 @@
     </a>
 
     <div class="header">
-        <center style="font-size:30px;" th:text="${title}">Default title</center>
+        <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
         <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
@@ -22,15 +22,15 @@
             <tr>
                 <th>Title</th>
                 <td th:id="${i.id}"
-                    th:text="${i.recipeName}"></td>
+                    th:text="${#strings.capitalize(i.recipeName)}"></td>
             </tr>
             <tr>
                 <th>Course</th>
-                <td th:text="${course.courseName}"></td>
+                <td th:text="${#strings.capitalize(course.courseName)}"></td>
             </tr>
             <tr>
                 <th>Category</th>
-                <td th:text="${category.categoryName}"></td>
+                <td th:text="${#strings.capitalize(category.categoryName)}"></td>
             </tr>
             <tr>
                 <th>Serving Size</th>
@@ -47,7 +47,7 @@
 
             <tr>
                 <th>Direction</th>
-                <td th:text="${i.direction}"></td>
+                <td th:text="${#strings.capitalize(i.direction)}"></td>
             </tr>
         </table>
         <table class="table table-striped">
@@ -58,7 +58,7 @@
             <tr th:each = "list : ${ingredientLists}">
 
             <tr>
-                <td th:text="${list.ingredient.ingredientName}"></td>
+                <td th:text="${#strings.capitalize(list.ingredient.ingredientName)}"></td>
                 <td th:id="${list.id}"
                     th:text="${list.amount}"></td>
             </tr>

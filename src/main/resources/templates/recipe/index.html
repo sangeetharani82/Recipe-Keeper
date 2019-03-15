@@ -5,7 +5,7 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container" style="background:#FFFFF0;">
     <div class="header">
-        <center style="font-size:30px;" th:text="${title}">Default title</center>
+        <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
         <a href="/recipe/add">
@@ -28,7 +28,7 @@
         </thead>
         <tr th:each="recipe : ${recipes}">
         <tr>
-            <td th:text="${recipe.recipeName} "
+            <td th:text="${#strings.capitalize(recipe.recipeName)} "
                 th:id="${recipe.id}"></td>
             <div class="btn-group">
                 <td>

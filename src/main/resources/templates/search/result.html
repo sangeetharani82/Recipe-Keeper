@@ -21,7 +21,7 @@
         </thead>
         <tr th:each="recipe : ${recipes}">
         <tr>
-            <td th:text="${recipe.recipeName}"
+            <td th:text="${#strings.capitalize(recipe.recipeName)}"
                 th:id="${recipe.id}"></td>
             <td>
                 <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">

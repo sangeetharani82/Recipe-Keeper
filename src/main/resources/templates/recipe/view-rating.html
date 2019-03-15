@@ -8,7 +8,7 @@
         <button class="btn btn-default">Home</button>
     </a>
     <div class="header">
-        <center style="font-size:30px;" th:text="${title}">Default title</center>
+        <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
 
     <hr/>
@@ -23,7 +23,7 @@
         <tr th:each="ratings : ${recipe.rateCommentList}">
         <tr th:each="rating : ${ratings}">
             <td th:id="${rating.id}" th:text="${rating.rating}"></td>
-            <td th:text="${rating.comment}"></td>
+            <td th:text="${#strings.capitalize(rating.comment)}"></td>
         </tr>
         </tr>
     </table>

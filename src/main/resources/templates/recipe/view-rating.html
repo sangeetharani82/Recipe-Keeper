@@ -10,7 +10,11 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
-
+    <div class="btn-group">
+        <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
+            <button type="button" class="btn btn-info">Comment</button></a>
+        </td>
+    </div>
     <hr/>
     <p th:unless="${recipe.rateCommentList.size()}">No Ratings</p>
 

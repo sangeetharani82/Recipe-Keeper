@@ -9,7 +9,7 @@ public class AddIngredientAndQuantityToRecipeForm {
 
     private Recipe recipe;
 
-    private Iterable<Ingredient> ingredients;
+    private Ingredient ingredient;
 
     @NotNull
     private int recipeId;
@@ -23,17 +23,18 @@ public class AddIngredientAndQuantityToRecipeForm {
     public AddIngredientAndQuantityToRecipeForm() {
     }
 
-    public AddIngredientAndQuantityToRecipeForm(Recipe recipe, Iterable<Ingredient> ingredients) {
+    public AddIngredientAndQuantityToRecipeForm(Recipe recipe, Ingredient ingredient, String amount) {
         this.recipe = recipe;
-        this.ingredients = ingredients;
+        this.ingredient = ingredient;
+        this.amount = amount;
     }
 
     public Recipe getRecipe() {
         return recipe;
     }
 
-    public Iterable<Ingredient> getIngredients() {
-        return ingredients;
+    public Ingredient getIngredient() {
+        return ingredient;
     }
 
     public int getRecipeId() {

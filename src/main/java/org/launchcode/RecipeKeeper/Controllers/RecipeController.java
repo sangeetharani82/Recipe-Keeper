@@ -127,13 +127,15 @@ public class RecipeController {
     @RequestMapping(value = "add-ingredient/{recipeId}", method = RequestMethod.GET)
     public String displayAddIngredientAndQuantityForm(@PathVariable int recipeId, Model model){
         Recipe recipe = recipeDao.findOne(recipeId);
-        AddIngredientAndQuantityToRecipeForm form = new AddIngredientAndQuantityToRecipeForm(recipe, ingredientDao.findAll());
+        String amount = "";
+        Ingredient ingredient = new Ingredient();
+        AddIngredientAndQuantityToRecipeForm form = new AddIngredientAndQuantityToRecipeForm(recipe, ingredient, amount);
         model.addAttribute("title", "Add Ingredient and Quantity to "+recipe.getRecipeName());
         model.addAttribute("form", form);
 
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        for (Ingredient ingredient : ingredientDao.findAll()){
-            ingredients.add(ingredient);
+        for (Ingredient i : ingredientDao.findAll()){
+            ingredients.add(i);
         }
         ingredients.sort(ingredientComparator);
         model.addAttribute("ingredients", ingredients);
@@ -155,6 +157,30 @@ public class RecipeController {
         ingredientAndQuantityDao.save(ingredientAndQuantity);
         recipeDao.save(recipe);
         return "redirect:view/"+ recipe.getId();
+    }
+
+    // delete each recipe instantly
+    @RequestMapping(value = "delete/{recipeId}")
+    public String delete(@PathVariable int recipeId, Model model){
+        Recipe recipe = recipeDao.findOne(recipeId);
+        for (RateComment rateComment : recipe.getRateCommentList()) {
+            rateCommentDao.delete(rateComment.getId());
+        }
+        ingredientAndQuantityDao.delete(recipe.getIngredientAndQuantities());
+        recipeDao.delete(recipeId);
+        model.addAttribute("message", "Recipe deleted successfully!");
+        return "recipe/message";
+    }
+
+    //delete the ingredient and quantity from the recipe
+    @RequestMapping(value = "remove/{recipeId}/{ingredientAndQuantityId}")
+    public String removeIngredientAndQuantity(@PathVariable int recipeId, @PathVariable int ingredientAndQuantityId,
+                                              Model model){
+        Recipe recipe = recipeDao.findOne(recipeId);
+        IngredientAndQuantity ingredientAndQuantity = ingredientAndQuantityDao.findOne(ingredientAndQuantityId);
+        ingredientAndQuantityDao.delete(ingredientAndQuantity);
+        model.addAttribute("message", "Ingredient and Quantity removed successfully");
+        return "redirect:/recipe/view/"+ recipe.getId();
     }
 
     //view single recipe
@@ -187,26 +213,6 @@ public class RecipeController {
         model.addAttribute("recipes", recipes);
         model.addAttribute("title", cat.getCategoryName() + " recipes");
         return "recipe/list-under";
-    }
-
-    // delete each recipe instantly
-    @RequestMapping(value = "delete/{recipeId}")
-    public String delete(@PathVariable int recipeId, Model model){
-        Recipe recipe = recipeDao.findOne(recipeId);
-        ingredientAndQuantityDao.delete(recipe.getIngredientAndQuantities());
-        recipeDao.delete(recipeId);
-        model.addAttribute("message", "Recipe deleted successfully!");
-        return "recipe/message";
-        //return "redirect:/recipe";
-    }
-
-    //delete the ingredient and quantity from the recipe
-    @RequestMapping(value = "remove/{ingredientAndQuantityId}")
-    public String removeIngredientAndQuantity(@PathVariable int ingredientAndQuantityId, Model model){
-        IngredientAndQuantity ingredientAndQuantity = ingredientAndQuantityDao.findOne(ingredientAndQuantityId);
-        ingredientAndQuantityDao.delete(ingredientAndQuantity);
-        model.addAttribute("message", "Ingredient and Quantity removed successfully");
-        return "recipe/message";
     }
 
     //Edit a recipe

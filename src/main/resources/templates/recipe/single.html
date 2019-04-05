@@ -33,7 +33,7 @@
                 <td th:text="${#strings.capitalize(category.categoryName)}"></td>
             </tr>
             <tr>
-                <th>Serving Size</th>
+                <th>Servings</th>
                 <td th:text="${i.servingSize}"></td>
             </tr>
             <tr>
@@ -50,19 +50,31 @@
                 <td th:text="${#strings.capitalize(i.direction)}"></td>
             </tr>
         </table>
+
         <table class="table table-striped">
             <tr>
-                <th>Ingredient</th>
-                <th>Quantity</th>
+                <p th:unless="${recipe.ingredientAndQuantities.size()}">
+                <p style="color:red;">Add Ingredients and quantities</p>
+                <a th:href="'/recipe/add-ingredient/' + ${recipe.id}">
+                    <button class="btn btn-success">Add Ingredients To Recipe</button>
+                </a>
+                </p>
             </tr>
-            <tr th:each = "list : ${ingredientLists}">
+            <p th:if="${recipe.ingredientAndQuantities.size()}">
+                <tr>
+                    <th>Ingredient</th>
+                    <th>Quantity</th>
+                </tr>
 
-            <tr>
-                <td th:text="${#strings.capitalize(list.ingredient.ingredientName)}"></td>
-                <td th:id="${list.id}"
-                    th:text="${list.amount}"></td>
-            </tr>
-            </tr>
+                <tr th:each = "list : ${ingredientLists}">
+
+                <tr>
+                    <td th:text="${#strings.capitalize(list.ingredient.ingredientName)}"></td>
+                    <td th:id="${list.id}"
+                        th:text="${list.amount}"></td>
+                </tr>
+                </tr>
+            </p>
         </table>
         <h5></h5>
         <hr />

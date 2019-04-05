@@ -2,6 +2,7 @@ package org.launchcode.RecipeKeeper.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,8 @@ public class Recipe {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 100)
+    @Pattern(regexp = "[^0-9]*")
+    @Size(min = 1, max = 100)
     private String recipeName;
 
     @ManyToOne

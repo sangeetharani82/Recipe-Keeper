@@ -52,6 +52,11 @@
                 <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
                     <button type="button" class="btn btn-info">Comment</button></a>
                 </td>
+                <td>
+                    <p th:unless="${recipe.ingredientAndQuantities.size()}">
+                        <p style="color:red;">Ingredients and quantities not specified yet</p>
+                    </p>
+                </td>
             </div>
         </tr>
         </tr>

@@ -18,8 +18,9 @@
 
         <div class="form-group">
             <label th:for="rating">Rating</label>
-            <select class="form-control" name="rating" id="rating">
-                <option value="0" selected="selected">---Select---</option>
+            <select class="form-control" name="rating" required="required" id="rating">
+                <option value="">---Select---</option>
+                <option value="0">Very Poor</option>
                 <option value="1">Poor</option>
                 <option value="2">Below Average</option>
                 <option value="3">Average</option>
@@ -29,7 +30,7 @@
 
             <div class="form-group">
                 <label th:for="comment">Comment</label>
-                <textarea class="form-control" th:field="*{comment}"></textarea>
+                <textarea class="form-control" th:field="*{comment}" required="required"></textarea>
                 <span th:errors="*{comment}" class="error"></span>
             </div>
             <input type="hidden" name="recipeId" th:value="*{recipe.id}"/>

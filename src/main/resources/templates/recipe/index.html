@@ -18,11 +18,8 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Modify</th>
             <th>Detail</th>
-            <th>Remove</th>
             <th>View Ratings</th>
-            <th>Comment</th>
         </tr>
 
         </thead>
@@ -31,27 +28,30 @@
             <td th:text="${#strings.capitalize(recipe.recipeName)} "
                 th:id="${recipe.id}"></td>
             <div class="btn-group">
+                <!--
                 <td>
                     <a th:href="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
                         <button type="button" class="btn btn-primary">Edit</button>
                     </a>
-                </td>
+                </td>-->
                 <td>
                     <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
                         <button type="button" class="btn btn-info">View</button>
                     </a>
                 </td>
+                <!--
                 <td>
                     <a th:href="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
                         <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
                     </a>
                 </td>
+                -->
                 <td  th:id="${recipe.id}"><a th:href="@{'/recipe/view-rating/' + ${recipe.id}}">
-                    <button type="button" class="btn btn-info">View Ratings</button></a>
+                    <button type="button" class="btn btn-info">Ratings</button></a>
                 </td>
-                <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
+                <!--<td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
                     <button type="button" class="btn btn-info">Comment</button></a>
-                </td>
+                </td>-->
                 <td>
                     <p th:unless="${recipe.ingredientAndQuantities.size()}">
                         <p style="color:red;">Ingredients and quantities not specified yet</p>

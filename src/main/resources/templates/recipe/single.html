@@ -12,6 +12,12 @@
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
+        <a th:href="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
+            <button type="button" class="btn btn-primary">Edit</button>
+        </a>
+        <a th:href="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+            <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
+        </a>
         <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
             <button type="button" class="btn btn-info">Comment</button></a>
         </td>

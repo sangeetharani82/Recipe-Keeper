@@ -21,6 +21,9 @@
         <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
             <button type="button" class="btn btn-info">Comment</button></a>
         </td>
+        <td  th:id="${recipe.id}"><a th:href="@{'/recipe/view-rating/' + ${recipe.id}}">
+            <button type="button" class="btn btn-info">Ratings</button></a>
+        </td>
     </div>
     <hr/>
     <div class="single" th:each = "i : ${recipe}">

@@ -15,43 +15,14 @@
 
     <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
     <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Detail</th>
-            <th>View Ratings</th>
-        </tr>
-
-        </thead>
         <tr th:each="recipe : ${recipes}">
-        <tr>
-            <td th:text="${#strings.capitalize(recipe.recipeName)} "
-                th:id="${recipe.id}"></td>
             <div class="btn-group">
-                <!--
-                <td>
-                    <a th:href="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                    </a>
-                </td>-->
-                <td>
+                <td><span>
                     <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button type="button" class="btn btn-info">View</button>
-                    </a>
+                        <button type="button" class="btn btn-info" th:text="${#strings.capitalize(recipe.recipeName)} "
+                                th:id="${recipe.id}"></button>
+                    </a></span>
                 </td>
-                <!--
-                <td>
-                    <a th:href="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-                        <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
-                    </a>
-                </td>
-                -->
-                <td  th:id="${recipe.id}"><a th:href="@{'/recipe/view-rating/' + ${recipe.id}}">
-                    <button type="button" class="btn btn-info">Ratings</button></a>
-                </td>
-                <!--<td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
-                    <button type="button" class="btn btn-info">Comment</button></a>
-                </td>-->
                 <td>
                     <p th:unless="${recipe.ingredientAndQuantities.size()}">
                         <p style="color:red;">Ingredients and quantities not specified yet</p>
@@ -59,8 +30,6 @@
                 </td>
             </div>
         </tr>
-        </tr>
-
     </table>
     <hr />
 </div>

@@ -15,7 +15,7 @@ public class Recipe {
 
     @NotNull
     @Pattern(regexp = "[^0-9]*")
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 1000)
     private String recipeName;
 
     @ManyToOne

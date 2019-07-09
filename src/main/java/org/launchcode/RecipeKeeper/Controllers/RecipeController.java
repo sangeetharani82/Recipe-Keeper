@@ -178,7 +178,10 @@ public class RecipeController {
         IngredientAndQuantity ingredientAndQuantity = ingredientAndQuantityDao.findOne(ingredientAndQuantityId);
         ingredientAndQuantityDao.delete(ingredientAndQuantity);
         model.addAttribute("message", "Ingredient and Quantity removed successfully");
-        return "redirect:/recipe/view/"+ recipe.getId();
+        //return "redirect:/recipe/view/"+ recipe.getId();
+        model.addAttribute("title", "Ingredients needed for " + recipe.getRecipeName());
+        model.addAttribute("recipe", recipe);
+        return "recipe/viewWithMsg";
     }
 
     //view single recipe

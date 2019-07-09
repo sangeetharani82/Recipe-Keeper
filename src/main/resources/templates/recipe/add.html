@@ -16,7 +16,7 @@
     <form method="post" style="max-width:500px;" th:object="${recipe}">
         <div class="form-group">
             <label th:for="recipeName">Title</label>
-            <input type="text" class="form-control" th:field="*{recipeName}" placeholder="Title" />
+            <input type="text" class="form-control" th:field="*{recipeName}" placeholder="Title" required="required" />
             <span th:errors="*{recipeName}" class="error"></span>
         </div>
         <div class="form-group">
@@ -41,17 +41,17 @@
         </div>
         <div class="form-group">
             <label th:for="servingSize">Serving Size</label>
-            <input type="text" class="form-control" th:field="*{servingSize}" placeholder="Serving size.."/>
+            <input type="text" class="form-control" th:field="*{servingSize}" placeholder="Serving size.." required="required"/>
             <span th:errors="*{servingSize}" class="error"></span>
         </div>
         <div class="form-group">
             <label th:for="prepTime">Prep Time</label>
-            <input type="text" class="form-control" th:field="*{prepTime}" placeholder="Prep Time" />
+            <input type="text" class="form-control" th:field="*{prepTime}" placeholder="Prep Time" required="required" />
             <span th:errors="*{prepTime}" class="error"></span>
         </div>
         <div class="form-group">
             <label th:for="cookTime">Cook Time</label>
-            <input type="text" class="form-control" th:field="*{cookTime}" placeholder="Cook Time"/>
+            <input type="text" class="form-control" th:field="*{cookTime}" placeholder="Cook Time" required="required"/>
             <span th:errors="*{cookTime}" class="error"></span>
         </div>
         <div class="form-group">

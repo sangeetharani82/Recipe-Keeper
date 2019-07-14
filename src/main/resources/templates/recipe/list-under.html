@@ -27,7 +27,7 @@
                 th:id="${recipe.id}"></td>
             <div class="btn-group">
                 <td>
-                    <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                    <a th:href="@{'/all/single/'+${recipe.id}}" th:object="${recipe}" method="get">
                         <button type="button" class="btn btn-info">View</button>
                     </a>
                 </td>

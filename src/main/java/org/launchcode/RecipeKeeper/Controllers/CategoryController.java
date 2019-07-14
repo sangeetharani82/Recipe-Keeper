@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -59,6 +56,24 @@ public class CategoryController {
         model.addAttribute("message", "Successfully added!");
         return "category/message";
         //return "redirect:";
+    }
+
+    @RequestMapping(value="edit/{categoryId}", method = RequestMethod.GET)
+    public String displayEditCategoryForm(Model model, @PathVariable int categoryId){
+        model.addAttribute(categoryDao.findOne(categoryId));
+        model.addAttribute("title", "Edit");
+        model.addAttribute("categoryName", categoryDao.findOne(categoryId).getCategoryName());
+        return "category/edit";
+    }
+
+    @RequestMapping(value = "edit/{categoryId}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable int categoryId, @RequestParam String categoryName, Model model){
+        Category edited = categoryDao.findOne(categoryId);
+        edited.setCategoryName(categoryName);
+        categoryDao.save(edited);
+        model.addAttribute("message", "Successfully edited and saved!");
+        return "category/message";
+        //return "redirect:/ingredient";
     }
 
     // delete each Category

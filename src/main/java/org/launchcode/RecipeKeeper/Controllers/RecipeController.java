@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "recipe")
+@RequestMapping(value = "all")
 public class RecipeController {
 
     @Autowired
@@ -46,7 +46,7 @@ public class RecipeController {
     CategoryComparator categoryComparator = new CategoryComparator();
     IngredientComparator ingredientComparator = new IngredientComparator();
 
-    // Request path: /recipe
+    // Request path: /all
     @RequestMapping(value = "")
     public String index(Model model) {
         ArrayList<Recipe> lists = new ArrayList<>();
@@ -194,6 +194,18 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         model.addAttribute("title", recipe.getRecipeName());
         model.addAttribute("ingredientLists", recipe.getIngredientAndQuantities());
+        List<RateComment> ratings = recipe.getRateCommentList();
+        double total = 0;
+        double average = 0;
+        if (ratings.size() > 0){
+            for (RateComment rating : ratings){
+                total = total + rating.getRating();
+            }
+            average = total / ratings.size();
+            model.addAttribute("average", average);
+        }else {
+            model.addAttribute("average", 0);
+        }
         return "recipe/single";
     }
 
@@ -269,7 +281,7 @@ public class RecipeController {
 
     @RequestMapping(value = "add-rating/{recipeId}", method = RequestMethod.GET)
     public String displayAddRatingForm(@PathVariable int recipeId, Model model){
-        String rating = "";
+        int rating = 0;
         String comment = "";
         Recipe recipe = recipeDao.findOne(recipeId);
         AddRateCommentToRecipeForm rateForm = new AddRateCommentToRecipeForm(recipe, rating, comment);

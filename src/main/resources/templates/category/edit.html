@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<!--<nav th:replace="fragments :: navigation"></nav>-->
+<div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/category'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
+    <div class="header">
+        <center style="font-size:30px;" th:text="${title}">Default title</center>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <form method="post" style="max-width:500px;" th:object="${category}">
+            <label th:for="categoryName">Title</label>
+            <input type="text" class="form-control" th:field="*{categoryName}" />
+            <span th:errors="*{categoryName}" class="error"></span>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+    <hr/>
+</div>
+
+</body>
+</html>

@@ -19,12 +19,19 @@ public class RateComment {
     private Recipe recipe;
 
     @NotNull
-    private String rating;
+    private int rating;
 
     @NotNull
     private String comment;
 
-    public RateComment(Recipe recipe, String rating, String comment) {
+//    public RateComment(Recipe recipe, i rating, String comment) {
+//        this.recipe = recipe;
+//        this.rating = rating;
+//        this.comment = comment;
+//    }
+
+
+    public RateComment(Recipe recipe, int rating, String comment) {
         this.recipe = recipe;
         this.rating = rating;
         this.comment = comment;
@@ -37,13 +44,21 @@ public class RateComment {
         return id;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
+
+    //    public String getRating() {
+//        return rating;
+//    }
+//
+//    public void setRating(String rating) {
+//        this.rating = rating;
+//    }
 
     public String getComment() {
         return comment;

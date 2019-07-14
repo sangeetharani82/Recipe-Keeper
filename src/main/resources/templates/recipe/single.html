@@ -12,17 +12,19 @@
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
-        <a th:href="@{'/recipe/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
+        <a th:href="@{'/all/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
             <button type="button" class="btn btn-primary">Edit</button>
         </a>
-        <a th:href="@{'/recipe/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+        <a th:href="@{'/all/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
             <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
         </a>
-        <td  th:id="${recipe.id}"><a th:href="@{'/recipe/add-rating/' + ${recipe.id}}">
-            <button type="button" class="btn btn-info">Comment</button></a>
+        <td  th:id="${recipe.id}"><a th:href="@{'/all/add-rating/' + ${recipe.id}}">
+            <button type="button" class="btn btn-info">Comments
+            <span class="badge" th:text="${recipe.rateCommentList.size()}"></span></button></a>
         </td>
-        <td  th:id="${recipe.id}"><a th:href="@{'/recipe/view-rating/' + ${recipe.id}}">
-            <button type="button" class="btn btn-info">Ratings</button></a>
+        <td  th:id="${recipe.id}"><a th:href="@{'/all/view-rating/' + ${recipe.id}}">
+            <button type="button" class="btn btn-info">Ratings
+            <span class="badge" th:text="${average}"></span></button></a>
         </td>
     </div>
     <hr/>
@@ -64,7 +66,7 @@
             <tr>
                 <p th:unless="${recipe.ingredientAndQuantities.size()}">
                 <p style="color:red;">Add Ingredients and quantities</p>
-                <a th:href="'/recipe/add-ingredient/' + ${recipe.id}">
+                <a th:href="'/all/add-ingredient/' + ${recipe.id}">
                     <button class="btn btn-success">Add Ingredients To Recipe</button>
                 </a>
                 </p>

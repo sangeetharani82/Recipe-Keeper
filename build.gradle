@@ -32,4 +32,7 @@ dependencies {
 
 }
 
+bootRun {
+	addResources = true
+}
 

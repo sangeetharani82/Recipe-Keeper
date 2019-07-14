@@ -20,18 +20,17 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Remove</th>
         </tr>
         </thead>
         <tr th:each="ingredient : ${ingredients}">
         <tr>
             <td th:id = "${ingredient.id}" ><a th:href="@{'/ingredient/edit/' + ${ingredient.id}}"
                                                th:text="${#strings.capitalize(ingredient.ingredientName)}"></a></td>
-            <td>
+            <!--<td>
                 <a th:href="@{'/ingredient/delete/'+${ingredient.id}}" th:object="${ingredient}" method="post">
                     <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>
                 </a>
-            </td>
+            </td>-->
         </tr>
         </tr>
     </table>

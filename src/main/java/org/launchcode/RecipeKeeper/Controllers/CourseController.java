@@ -14,7 +14,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping(value = "course")
+@RequestMapping(value = "recipe")
+//@RequestMapping(value = "course")
 public class CourseController {
 
     @Autowired
@@ -55,6 +56,36 @@ public class CourseController {
         model.addAttribute("message", "Successfully added!");
         return "course/message";
         //return "redirect:";
+    }
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String displayCourseLists(Model model){
+        ArrayList<Course> lists = new ArrayList<>();
+        for (Course course : courseDao.findAll()){
+            lists.add(course);
+        }
+        lists.sort(courseComparator);
+        model.addAttribute("title", "Edit a course");
+        model.addAttribute("courses", lists);
+        return "course/list";
+    }
+
+    @RequestMapping(value="edit/{courseId}", method = RequestMethod.GET)
+    public String displayEditCourseForm(Model model, @PathVariable int courseId){
+        model.addAttribute(courseDao.findOne(courseId));
+        model.addAttribute("title", "Edit");
+        model.addAttribute("courseName", courseDao.findOne(courseId).getCourseName());
+        return "course/edit";
+    }
+
+    @RequestMapping(value = "edit/{courseId}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable int courseId, @RequestParam String courseName, Model model){
+        Course edited = courseDao.findOne(courseId);
+        edited.setCourseName(courseName);
+        courseDao.save(edited);
+        model.addAttribute("message", "Successfully edited and saved!");
+        return "course/message";
+        //return "redirect:/ingredient";
     }
 
     // delete each course

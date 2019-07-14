@@ -9,7 +9,7 @@ public class AddRateCommentToRecipeForm {
     private Recipe recipe;
 
     @NotNull
-    private String rating;
+    private int rating;
 
     @NotNull
     private String comment;
@@ -20,21 +20,36 @@ public class AddRateCommentToRecipeForm {
     public AddRateCommentToRecipeForm() {
     }
 
-    public AddRateCommentToRecipeForm(Recipe recipe, String rating, String comment) {
+    public AddRateCommentToRecipeForm(Recipe recipe, int rating, String comment) {
         this.recipe = recipe;
         this.rating = rating;
         this.comment = comment;
     }
 
+    //    public AddRateCommentToRecipeForm(Recipe recipe, String rating, String comment) {
+//        this.recipe = recipe;
+//        this.rating = rating;
+//        this.comment = comment;
+//    }
+
     public Recipe getRecipe() {
         return recipe;
     }
 
-    public String getRating() {
+//    public String getRating() {
+//        return rating;
+//    }
+//
+//    public void setRating(String rating) {
+//        this.rating = rating;
+//    }
+
+
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

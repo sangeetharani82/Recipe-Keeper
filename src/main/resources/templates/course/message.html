@@ -6,10 +6,10 @@
     <div class="alert alert-success">
         <strong th:text="${message}">Success!</strong>
     </div>
-    <a th:href="@{'/course'}" method="get">
+    <a th:href="@{'/recipe'}" method="get">
         <button class="btn btn-default">Home</button>
     </a>
-    <a th:href="@{'/course/add'}" th:object="${course}" method="get">
+    <a th:href="@{'/recipe/add'}" th:object="${recipe}" method="get">
         <button class="btn btn-success">Add a Course</button>
     </a>
 </div>

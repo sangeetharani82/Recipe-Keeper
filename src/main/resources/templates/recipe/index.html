@@ -2,13 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<nav th:replace="fragments :: navigation"></nav>
+<!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
+    <a th:href="@{'/recipe'}" method="get">
+        <button class="btn btn-default">Home</button>
+    </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
-        <a href="/recipe/add">
+        <a href="/all/add">
             <button type="button" class="btn btn-success">Add Recipe</button></a>
     </div>
     <hr/>
@@ -18,7 +21,7 @@
         <tr th:each="recipe : ${recipes}">
             <div class="btn-group">
                 <td><span>
-                    <a th:href="@{'/recipe/single/'+${recipe.id}}" th:object="${recipe}" method="get">
+                    <a th:href="@{'/all/single/'+${recipe.id}}" th:object="${recipe}" method="get">
                         <button type="button" class="btn btn-info" th:text="${#strings.capitalize(recipe.recipeName)} "
                                 th:id="${recipe.id}"></button>
                     </a></span>

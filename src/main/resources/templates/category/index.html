@@ -21,18 +21,19 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Remove</th>
         </tr>
         </thead>
         <tr th:each="category : ${categories}">
         <tr>
-            <td th:id = "${category.id}" ><a th:href="@{'/recipe/category?id=' + ${category.id}}" th:text="${#strings.capitalize(category.categoryName)}"></a>
+            <td th:id="${category.id}"><a th:href="@{'/all/category?id=' + ${category.id}}"
+                                             th:text="${#strings.capitalize(category.categoryName)}"></a>
             </td>
-            <td>
+            <td th:id="${category.id}"><a th:href="@{'category/edit/' + ${category.id}}">Edit</a></td>
+            <!--<td>
                 <a th:href="@{'/category/delete/'+${category.id}}" th:object="${category}" method="post">
                     <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Delete</button>
                 </a>
-            </td>
+            </td>-->
         </tr>
         </tr>
     </table>

@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.expression.Strings;
 
 import javax.validation.Valid;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "all")
 public class RecipeController {
+
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     @Autowired
     RecipeDao recipeDao;
@@ -202,7 +205,7 @@ public class RecipeController {
                 total = total + rating.getRating();
             }
             average = total / ratings.size();
-            model.addAttribute("average", average);
+            model.addAttribute("average", df2.format(average));
         }else {
             model.addAttribute("average", 0);
         }
@@ -216,6 +219,20 @@ public class RecipeController {
         List<Recipe> recipes = cor.getRecipes();
         model.addAttribute("recipes", recipes);
         model.addAttribute("title", cor.getCourseName() + " recipes");
+        for (Recipe recipe : recipes){
+            List<RateComment> ratings = recipe.getRateCommentList();
+            double total = 0;
+            double average = 0;
+            if (ratings.size() > 0){
+                for (RateComment rating : ratings){
+                    total = total + rating.getRating();
+                }
+                average = total / ratings.size();
+                model.addAttribute("average", df2.format(average));
+            }else {
+                model.addAttribute("average", 0);
+            }
+        }
         return "recipe/list-under";
     }
     //recipes in a category

@@ -17,22 +17,19 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Detail</th>
         </tr>
 
         </thead>
         <tr th:each="recipe : ${recipes}">
-        <tr>
-            <td th:text="${#strings.capitalize(recipe.recipeName)}"
-                th:id="${recipe.id}"></td>
-            <div class="btn-group">
-                <td>
-                    <a th:href="@{'/all/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button type="button" class="btn btn-info">View</button>
-                    </a>
-                </td>
-            </div>
-        </tr>
+            <tr>
+                <div class="btn-group">
+                    <td  th:id="${recipe.id}"><a th:href="@{'/all/single/'+${recipe.id}}">
+                        <button type="button" class="btn btn-info" th:object="${recipe}" method="get"
+                                th:text="${#strings.capitalize(recipe.recipeName)}"></button></a>
+                            <span class="badge" th:text="${average}"></span>
+                    </td>
+                </div>
+            </tr>
         </tr>
 
     </table>

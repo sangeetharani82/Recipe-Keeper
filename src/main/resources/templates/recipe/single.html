@@ -15,9 +15,6 @@
         <a th:href="@{'/all/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
             <button type="button" class="btn btn-primary">Edit</button>
         </a>
-        <a th:href="@{'/all/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-            <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
-        </a>
         <td  th:id="${recipe.id}"><a th:href="@{'/all/add-rating/' + ${recipe.id}}">
             <button type="button" class="btn btn-info">Comments
             <span class="badge" th:text="${recipe.rateCommentList.size()}"></span></button></a>
@@ -26,6 +23,9 @@
             <button type="button" class="btn btn-info">Ratings
             <span class="badge" th:text="${average}"></span></button></a>
         </td>
+        <a th:href="@{'/all/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
+            <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
+        </a>
     </div>
     <hr/>
     <div class="single" th:each = "i : ${recipe}">
@@ -65,12 +65,13 @@
         <table class="table table-striped">
             <tr>
                 <p th:unless="${recipe.ingredientAndQuantities.size()}">
-                <p style="color:red;">Add Ingredients and quantities</p>
-                <a th:href="'/all/add-ingredient/' + ${recipe.id}">
-                    <button class="btn btn-success">Add Ingredients To Recipe</button>
-                </a>
+                    <p style="color:red;">Add Ingredients and quantities</p>
+                    <a th:href="'/all/add-ingredient/' + ${recipe.id}">
+                        <button class="btn btn-success">Add Ingredients To Recipe</button>
+                    </a>
                 </p>
             </tr>
+
             <p th:if="${recipe.ingredientAndQuantities.size()}">
                 <tr>
                     <th>Ingredient</th>

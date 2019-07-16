@@ -16,6 +16,11 @@
     <a th:href="'/all/add-ingredient/' + ${recipe.id}">
         <button class="btn btn-success">Add Ingredients To Recipe</button>
     </a>
+    <!--<tr>
+        <a th:href="'/all/edit-ingredients/' + ${recipe.id}">
+            <button class="btn btn-success">Edit ingredients and quantity</button>
+        </a>
+    </tr>-->
 
     <hr/>
     <p th:unless="${recipe.ingredientAndQuantities.size()}">No Ingredients added yet</p>

@@ -10,16 +10,8 @@
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
 
-    <hr/>
-
     <p th:unless="${recipes} and ${recipes.size()}">no recipes :-(</p>
     <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-
-        </thead>
         <tr th:each="recipe : ${recipes}">
             <tr>
                 <div class="btn-group">
@@ -29,6 +21,14 @@
                             <span class="badge" th:text="${average}"></span>
                     </td>
                 </div>
+                <td>
+                    <p th:unless="${recipe.ingredientAndQuantities.size()}">
+                        <p style="color:red;">Ingredients and quantities not specified yet</p>
+                        <a th:href="'/all/add-ingredient/' + ${recipe.id}">
+                            <button class="btn btn-success">Add Ingredients To Recipe</button>
+                        </a>
+                    </p>
+                </td>
             </tr>
         </tr>
 

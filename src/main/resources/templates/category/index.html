@@ -25,8 +25,10 @@
         </thead>
         <tr th:each="category : ${categories}">
         <tr>
-            <td th:id="${category.id}"><a th:href="@{'/all/category?id=' + ${category.id}}"
-                                             th:text="${#strings.capitalize(category.categoryName)}"></a>
+            <td th:id="${category.id}">
+                <a th:href="@{'/all/category?id=' + ${category.id}}"
+                   th:text="${#strings.capitalize(category.categoryName)}"></a>
+                <span class="badge" th:text="${category.recipes.size()}"></span>
             </td>
             <td th:id="${category.id}"><a th:href="@{'category/edit/' + ${category.id}}">Edit</a></td>
             <!--<td>

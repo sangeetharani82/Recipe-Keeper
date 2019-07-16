@@ -5,13 +5,15 @@ import org.launchcode.RecipeKeeper.models.Course;
 import org.launchcode.RecipeKeeper.models.data.CourseDao;
 import org.launchcode.RecipeKeeper.models.data.RecipeDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "recipe")
@@ -58,6 +60,7 @@ public class CourseController {
         //return "redirect:";
     }
 
+    //lists the courses to edit
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String displayCourseLists(Model model){
         ArrayList<Course> lists = new ArrayList<>();

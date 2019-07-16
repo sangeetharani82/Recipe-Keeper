@@ -132,4 +132,9 @@ public class Recipe {
 
         ingredientAndQuantities.add(item);
     }
+    public void setIQList(List<IngredientAndQuantity> items){
+        for (IngredientAndQuantity item : items){
+            ingredientAndQuantities.add(item);
+        }
+    }
 }

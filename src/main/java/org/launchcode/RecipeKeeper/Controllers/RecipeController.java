@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.expression.Strings;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -280,7 +281,6 @@ public class RecipeController {
         edited.setCookTime(cookTime);
         edited.setDirection(direction);
 
-
         Course cor = courseDao.findOne(courseId);
         edited.setCourse(cor);
 
@@ -292,7 +292,6 @@ public class RecipeController {
         model.addAttribute("message", "Successfully edited!");
         model.addAttribute("recipe", edited);
         model.addAttribute("title", "Ingredients needed for " + edited.getRecipeName());
-        model.addAttribute("ingredientLists", edited.getIngredientAndQuantities());
         return "recipe/view";
     }
 
@@ -338,4 +337,39 @@ public class RecipeController {
         model.addAttribute("recipe", recipe);
         return "recipe/view-rating";
     }
+
+    //Edit the ingredients and quantities of a recipe
+    @RequestMapping(value = "edit-ingredients/{recipeId}", method = RequestMethod.GET)
+    public String displayEditIngredientsAndQuantity(Model model, @PathVariable int recipeId){
+        Recipe recipe = recipeDao.findOne(recipeId);
+
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        for (Ingredient i : ingredientDao.findAll()){
+            ingredients.add(i);
+        }
+        ingredients.sort(ingredientComparator);
+
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("form", new IngredientAndQuantity());
+        model.addAttribute("title", "Edit " + recipe.getRecipeName() + " ingredients");
+        model.addAttribute("ingredients", ingredients);
+        return "recipe/edit-ingredients";
+    }
+
+//    // can't edit yet
+//    @RequestMapping(value = "edit-ingredients/{recipeId}", method = RequestMethod.POST)
+//    public String processEditIngredientsAndQuantity(Model model, @PathVariable int recipeId){
+//
+//        Recipe editedList = recipeDao.findOne(recipeId);
+//
+//        recipeDao.save(editedList);
+//
+//
+//        model.addAttribute("message", "Successfully edited!");
+//        model.addAttribute("recipe", editedList);
+//        model.addAttribute("title", "Ingredients needed for " + editedList.getRecipeName());
+//
+//        //return "redirect:view/"+ editedList.getId();
+//        return "recipe/view";
+//    }
 }

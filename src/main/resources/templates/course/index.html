@@ -8,15 +8,15 @@
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
 
-    <hr />
     <p th:unless="${courses} and ${courses.size()}">no courses :-(</p>
 
     <table class="table table-striped">
         <tr th:each="course : ${courses}">
         <tr>
             <td th:id = "${course.id}" >
-                    <a type="button" class="btn btn-primary" th:href="@{'/all/course?id=' + ${course.id}}"
+                <a type="button" class="btn btn-primary" th:href="@{'/all/course?id=' + ${course.id}}"
                    th:text="${#strings.capitalize(course.courseName)}"></a>
+                    <span class="badge" th:text="${course.recipes.size()}"></span>
                 </td>
         <!--<td>
             <a th:href="@{'/course/delete/'+${course.id}}" th:object="${course}" method="post">
@@ -26,7 +26,6 @@
         </tr>
         </tr>
     </table>
-
     <hr />
 </div>
 

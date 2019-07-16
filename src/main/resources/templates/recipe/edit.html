@@ -11,7 +11,13 @@
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
+    <!--<tr>
+        <a th:href="'/all/edit-ingredients/' + ${recipe.id}">
+            <button class="btn btn-success">Edit ingredients and quantity</button>
+        </a>
+    </tr>-->
     <hr/>
+
     <form method="post" style="max-width:500px;" th:object="${recipe}">
         <div class="form-group">
             <label th:for="recipeName">Title</label>

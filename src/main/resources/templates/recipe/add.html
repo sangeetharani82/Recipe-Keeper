@@ -6,7 +6,7 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
@@ -59,7 +59,7 @@
             <textarea class="form-control" th:field="*{direction}" placeholder="Cooking method.." style="height:200px"></textarea>
             <span th:errors="*{direction}" class="error"></span>
         </div>
-        <button type="submit" class="btn btn-success">Create</button>
+        <button type="submit" class="btn btn-success btn-sm">Create</button>
     </form>
     <hr/>
 </div>

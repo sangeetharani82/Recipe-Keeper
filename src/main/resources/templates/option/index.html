@@ -5,27 +5,27 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
     <hr />
     <a th:href="@{'/recipe/add'}" th:object="${course}" method="get">
-        <button class="btn btn-success">Create a Course</button>
+        <button class="btn btn-success btn-sm">Create a Course</button>
     </a>
     <a th:href="@{'/category/add'}" th:object="${category}" method="get">
-        <button class="btn btn-success">Create a Category</button>
+        <button class="btn btn-success btn-sm">Create a Category</button>
     </a>
     <a th:href="@{'/ingredient/add'}" th:object="${ingredient}" method="get">
-        <button class="btn btn-success">Create an Ingredient</button>
+        <button class="btn btn-success btn-sm">Create an Ingredient</button>
     </a>
     <a href="/all/add">
-        <button type="button" class="btn btn-success">Create a Recipe</button>
+        <button type="button" class="btn btn-success btn-sm">Create a Recipe</button>
     </a>
     <hr />
     <a href="/recipe/list">
-       <button type="button" class="btn btn-primary">Edit a course</button>
+       <button type="button" class="btn btn-primary btn-sm">Edit a course</button>
     </a>
 
 

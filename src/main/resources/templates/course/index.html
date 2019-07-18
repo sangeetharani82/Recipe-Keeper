@@ -14,7 +14,7 @@
         <tr th:each="course : ${courses}">
         <tr>
             <td th:id = "${course.id}" >
-                <a type="button" class="btn btn-primary" th:href="@{'/all/course?id=' + ${course.id}}"
+                <a type="button" class="btn btn-primary btn-sm" th:href="@{'/all/course?id=' + ${course.id}}"
                    th:text="${#strings.capitalize(course.courseName)}"></a>
                     <span class="badge" th:text="${course.recipes.size()}"></span>
                 </td>

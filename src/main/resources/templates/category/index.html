@@ -5,14 +5,14 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${title}">Default title</center>
     </div>
 
     <a th:href="@{'/category/add'}" th:object="${category}" method="get">
-        <button class="btn btn-success">Add a Category</button>
+        <button class="btn btn-success btn-sm">Add a Category</button>
     </a>
     <hr />
     <p th:unless="${categories} and ${categories.size()}">no categories :-(</p>

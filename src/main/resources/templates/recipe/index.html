@@ -5,14 +5,14 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
         <a href="/all/add">
-            <button type="button" class="btn btn-success">Add Recipe</button></a>
+            <button type="button" class="btn btn-success btn-sm">Add Recipe</button></a>
     </div>
     <hr/>
 
@@ -22,13 +22,14 @@
             <div class="btn-group">
                 <td><span>
                     <a th:href="@{'/all/single/'+${recipe.id}}" th:object="${recipe}" method="get">
-                        <button type="button" class="btn btn-info" th:text="${#strings.capitalize(recipe.recipeName)} "
+                        <button type="button" class="btn btn-info btn-sm" th:text="${#strings.capitalize(recipe.recipeName)} "
                                 th:id="${recipe.id}"></button>
                     </a></span>
                 </td>
                 <td>
                     <p th:unless="${recipe.ingredientAndQuantities.size()}">
-                        <p style="color:red;">Ingredients and quantities not specified yet</p>
+                        <a style="color:red;" th:href="'/all/add-ingredient/' + ${recipe.id}">
+                            Ingredients and quantities not specified yet</a>
                     </p>
                 </td>
             </div>

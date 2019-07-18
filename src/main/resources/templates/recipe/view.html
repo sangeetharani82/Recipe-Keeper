@@ -5,7 +5,7 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
@@ -14,7 +14,7 @@
         <strong th:text="${message}">Success!</strong>
     </div>
     <a th:href="'/all/add-ingredient/' + ${recipe.id}">
-        <button class="btn btn-success">Add Ingredients To Recipe</button>
+        <button class="btn btn-success btn-sm">Add Ingredients To Recipe</button>
     </a>
 
     <hr/>
@@ -33,7 +33,7 @@
                 <td th:text="${#strings.capitalize(ingredientAndQuantity.amount)}"></td>
                 <td>
                     <a th:href="@{'/all/remove/'+ ${recipe.id} + '/' + ${ingredientAndQuantity.id}}" th:object="${recipe}" method="post">
-                        <button type="submit" class="btn btn-danger" onClick="return confirm('sure?')">Remove</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onClick="return confirm('sure?')">Remove</button>
                     </a>
                 </td>
             </tr>

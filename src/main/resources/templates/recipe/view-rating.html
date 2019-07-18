@@ -5,14 +5,14 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
     </div>
     <div class="btn-group">
         <td  th:id="${recipe.id}"><a th:href="@{'/all/add-rating/' + ${recipe.id}}">
-            <button type="button" class="btn btn-info">Comment</button></a>
+            <button type="button" class="btn btn-info btn-sm">Comment</button></a>
         </td>
     </div>
     <hr/>

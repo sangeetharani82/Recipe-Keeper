@@ -7,10 +7,10 @@
         <strong th:text="${message}">Success!</strong>
     </div>
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <a th:href="@{'/recipe/add'}" th:object="${recipe}" method="get">
-        <button class="btn btn-success">Add a Course</button>
+        <button class="btn btn-success btn-sm">Add a Course</button>
     </a>
 </div>
 </body>

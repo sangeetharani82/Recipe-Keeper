@@ -4,7 +4,7 @@
 <body>
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
     <div class="header">
         <center style="font-size:30px;" th:text="${#strings.capitalize(title)}">Default title</center>
@@ -16,17 +16,15 @@
             <tr>
                 <div class="btn-group">
                     <td  th:id="${recipe.id}"><a th:href="@{'/all/single/'+${recipe.id}}">
-                        <button type="button" class="btn btn-info" th:object="${recipe}" method="get"
+                        <button type="button" class="btn btn-info btn-sm" th:object="${recipe}" method="get"
                                 th:text="${#strings.capitalize(recipe.recipeName)}"></button></a>
                             <span class="badge" th:text="${average}"></span>
                     </td>
                 </div>
                 <td>
                     <p th:unless="${recipe.ingredientAndQuantities.size()}">
-                        <p style="color:red;">Ingredients and quantities not specified yet</p>
-                        <a th:href="'/all/add-ingredient/' + ${recipe.id}">
-                            <button class="btn btn-success">Add Ingredients To Recipe</button>
-                        </a>
+                        <a style="color:red;" th:href="'/all/add-ingredient/' + ${recipe.id}">
+                            Ingredients and quantities not specified yet</a>
                     </p>
                 </td>
             </tr>

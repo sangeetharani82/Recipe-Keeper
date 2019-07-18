@@ -5,7 +5,7 @@
 <!--<nav th:replace="fragments :: navigation"></nav>-->
 <div class="container" style="background:#FFFFF0;">
     <a th:href="@{'/recipe'}" method="get">
-        <button class="btn btn-default">Home</button>
+        <button class="btn btn-default btn-sm">Home</button>
     </a>
 
     <div class="header">
@@ -13,18 +13,18 @@
     </div>
     <div class="btn-group">
         <a th:href="@{'/all/edit/'+${recipe.id}}" th:object="${recipe}" method="get">
-            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-primary btn-sm">Edit</button>
         </a>
         <td  th:id="${recipe.id}"><a th:href="@{'/all/add-rating/' + ${recipe.id}}">
-            <button type="button" class="btn btn-info">Comments
+            <button type="button" class="btn btn-info btn-sm">Comments
             <span class="badge" th:text="${recipe.rateCommentList.size()}"></span></button></a>
         </td>
         <td  th:id="${recipe.id}"><a th:href="@{'/all/view-rating/' + ${recipe.id}}">
-            <button type="button" class="btn btn-info">Ratings
+            <button type="button" class="btn btn-info btn-sm">Ratings
             <span class="badge" th:text="${average}"></span></button></a>
         </td>
         <a th:href="@{'/all/delete/'+${recipe.id}}" th:object="${recipe}" method="post">
-            <button type="button" class="btn btn-danger" onClick="return confirm('Are you sure?')">Delete</button>
+            <button type="button" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?')">Delete</button>
         </a>
     </div>
     <hr/>
@@ -55,20 +55,17 @@
                 <th>CookTime</th>
                 <td th:text="${i.cookTime}"></td>
             </tr>
-
-            <tr>
-                <th>Direction</th>
-                <td th:text="${#strings.capitalize(i.direction)}"></td>
-            </tr>
         </table>
+        <td>
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Direction</button>
+        <div id="demo" class="collapse" th:text="${#strings.capitalize(i.direction)}"></div></td>
+
 
         <table class="table table-striped">
             <tr>
                 <p th:unless="${recipe.ingredientAndQuantities.size()}">
-                    <p style="color:red;">Add Ingredients and quantities</p>
-                    <a th:href="'/all/add-ingredient/' + ${recipe.id}">
-                        <button class="btn btn-success">Add Ingredients To Recipe</button>
-                    </a>
+                    <a style="color:red;" th:href="'/all/add-ingredient/' + ${recipe.id}">
+                        Add Ingredients and quantities</a>
                 </p>
             </tr>
 
